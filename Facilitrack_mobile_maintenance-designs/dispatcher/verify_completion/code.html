@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FacilityFlow | Dispatcher Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary-fixed": "#271901",
+                        "outline-variant": "#c6c6cd",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-container": "#98805d",
+                        "on-surface-variant": "#45464d",
+                        "on-background": "#1b1b1d",
+                        "surface-bright": "#fcf8fa",
+                        "primary-fixed": "#dae2fd",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "surface-container-high": "#eae7e9",
+                        "surface-container-low": "#f6f3f5",
+                        "primary": "#000000",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "inverse-primary": "#bec6e0",
+                        "on-surface": "#1b1b1d",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "background": "#fcf8fa",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#565e74",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#303032",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0edef",
+                        "inverse-on-surface": "#f3f0f2",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf8fa",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary-container": "#d0e1fb",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-container": "#271901",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary": "#505f76",
+                        "secondary-fixed": "#d3e4fe",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcd9db",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "container-padding": "16px",
+                        "card-gap": "12px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "mono-sm": ["Geist Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            font-family: 'Inter', sans-serif;
+            color: #1b1b1d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .image-comparison-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(228, 226, 228, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm z-40">
+<div class="flex justify-between items-center px-container-padding h-16 w-full max-w-[430px] mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style="font-size: 24px;">precision_manufacturing</span>
+<h1 class="font-h1 text-h1 text-primary dark:text-primary-fixed-dim tracking-tight">FacilityFlow</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container overflow-hidden">
+<img alt="Dispatcher Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOisuKUD7Gw4kRHR5r1iwi5Y-9UdcUzBD0YAvuUGmrdxXnyY0jkjkkRc4wXOpNXbkV11wyrFGEsrrjUbBCvlb-TNreLj2jotoSonOhaZVHmvvWGokZSYm2Ht73h84CFTrgPbexFYoLHrvGT2cfTePyjMO_iGCTRpvOfqssukhSHVe6s8vbT0vJVzJUE7fFHRu1JJNzFwMIiLHqMLveLPpo1y1UmHRss7fY74ovppeXktW4QfDwhSE71JL95VSDwd22h7ZL8dexRDM"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-20 px-container-padding max-w-[430px] mx-auto space-y-md">
+<!-- Header Info -->
+<section class="mt-4">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant uppercase tracking-wider">WO-882910</span>
+<h2 class="font-h2 text-h2 text-on-surface mt-1">HVAC Compressor Failure</h2>
+</div>
+<div class="bg-secondary-container px-3 py-1 rounded-full">
+<span class="font-label-sm text-label-sm text-on-secondary-container">PENDING VERIFICATION</span>
+</div>
+</div>
+</section>
+<!-- Before / After Comparison -->
+<section class="space-y-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 18px;">compare</span>
+<h3 class="font-label-md text-label-md text-on-surface-variant">Visual Proof</h3>
+</div>
+<!-- Side-by-Side Bento Style -->
+<div class="grid grid-cols-2 gap-3">
+<div class="relative rounded-xl overflow-hidden shadow-sm group">
+<img class="w-full h-48 object-cover" data-alt="A macro photograph of a damaged industrial HVAC compressor before repair, showing significant rust, frayed wiring, and visible oil leaks in a dimly lit industrial basement. The lighting is harsh and metallic, emphasizing the worn-out state of the mechanical parts. The image style is realistic and documentary-focused, fitting a high-fidelity facility management dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDIkwmK0cl_KhcbYnZxczhc8hMtblN9z2kZWBlwapbcf0eBdx50v7lAUGTBv6NiEqJ8ZrkalE99KCAavxF3ovvuo9sKrE75eFfYPavKGR5ktr2-WClAVYj_9V50ler04OMghBOYWgZsTYLx1wt7YcAvFu6-scimqBLF_iBxqzvg-fHPJjqx751NjZP7e6DhFJfy3GrEcjp3BnwOPmHce-aKg-m3OZvEWEvd0YbyEiNpCul4vBlvReA7rFPaehXirbESnBPru5ww1I"/>
+<div class="absolute top-2 left-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-full">
+<span class="text-[10px] font-bold text-white uppercase tracking-tighter">Before</span>
+</div>
+</div>
+<div class="relative rounded-xl overflow-hidden shadow-sm group border-2 border-emerald-500/30">
+<img class="w-full h-48 object-cover" data-alt="A professional, close-up photograph of a newly installed industrial compressor unit. The mechanical components are pristine, with clean copper piping and organized cabling. Soft overhead LED lighting highlights the polished metallic surfaces, creating a sense of reliability and professional completion. The composition is clean and technical, mirroring the aesthetic of a premium facility management interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApvJh9fwgXBPITO84SLUYsOjP02txsFVLkFhhP8qxMO40mvHuzQZr1OHZgDum5HBgjnFzm8sldtB0emwUfLCXlsNgJ0eb2I9crsL_AoxJlrNHQbDuU5VkkfBX3hJx2T43b4evRyxKn003yZP6CBLNedl7NuZz_mk4jj-HP-Pn-eyil1H-bEWWHm3fFiLs1YJwar2Z4FB-qoCVGf3ycfsxP_iWBkaGKm3B9CU4fbBTdMqU1LKjdoaONIJNqK_HXOxsncA0wjGFPDGo"/>
+<div class="absolute top-2 left-2 bg-emerald-600 px-2 py-0.5 rounded-full shadow-lg">
+<span class="text-[10px] font-bold text-white uppercase tracking-tighter">After</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Proof Playback -->
+<section class="bg-white border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px;">videocam</span>
+<span class="font-label-md text-label-md text-on-surface">Playback Proof</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">00:14 / 00:30</span>
+</div>
+<div class="relative aspect-video bg-surface-dim rounded-lg overflow-hidden flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="A blurred background image showing a technician in a high-visibility vest working in a server room or technical hub. In the center, a large 'Play' icon is visible. The scene is illuminated with cool blue tones and bright industrial lights, maintaining the professional and technical mood of a modern facility operation system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIld6Sof5yWY8SIK2y6W4SI_lKkt2mwpULmn6MwA0Q_wNT3xYXHyE8dNttevn6Jt_vNYlgz8_tCbKffht5H8PKcucquJuqgvrD2lm0PlXQ779QbY_scy7RbCf2hNqDohuL5_ugtxSjIRSwNkG_y5MkdKOw3FPjGWy-5vizVBEK3sFbVWDHBJ0iLjJUu6AvdvssfRuCQBVqqdq5YGhuCFIDp0AOs9Fxnyn2GA0A3Ud2Y8tEBlUyegYfX8dReKKS9Dx9Fs2i8TSx4Yw"/>
+<button class="z-10 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-xl transition-transform active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+</div>
+</section>
+<!-- Technician Notes -->
+<section class="space-y-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 18px;">history_edu</span>
+<h3 class="font-label-md text-label-md text-on-surface-variant">Technician Notes</h3>
+</div>
+<div class="bg-white border border-outline-variant rounded-xl p-md shadow-sm space-y-md">
+<div class="flex items-center gap-3">
+<img alt="Tech Avatar" class="w-10 h-10 rounded-full bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRbP5IYS_CIlDmu811RDLKh4Kc8zc8U7e9hurNpela1uO7EXyVsI02dC0g31gFgRiUKkGX2v4DzEL1_ym0UwEUZ_PJFWEQZmpF43tZyc3hFUqK6Bdh0umEiFAcIsztnMM56gLeGOe05_xtVntYIWyVHdhH5FidohfYRepxqIJNRJ0_bdaLHCfS4IoLd9npzIwdkW6BSGupDrgItHLAI41gF54_o4mu8hP16aSIS_px8OP7ol8Kt8h3CNvFFljiR7V3aNYnVNvXuu8"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Mark Sanderson</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lead Maintenance Tech</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed italic">
+                        "Replaced main compressor unit (Model X-400). Pressure tested lines up to 250 PSI. No leaks detected during 20-minute cycle. System running at optimal 68°F. Cleaned debris from external venting assembly."
+                    </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1 bg-surface-container px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">sell</span>
+<span class="font-mono-sm text-mono-sm">Compressor</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">sell</span>
+<span class="font-mono-sm text-mono-sm">Pressure_Test</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Decision Center -->
+<section class="pt-4 grid grid-cols-1 gap-3">
+<button class="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] shadow-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md font-bold uppercase tracking-wide">Approve and Close</span>
+</button>
+<button class="w-full h-12 bg-white border-2 border-error text-error hover:bg-error/5 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined">restart_alt</span>
+<span class="font-label-md text-label-md font-semibold">Reject and Reopen</span>
+</button>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-2">
+                Approving will finalize billing and update site inventory.
+            </p>
+</section>
+</main>
+<!-- Bottom Navigation Component -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] flex justify-around items-center py-sm px-md z-50 bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-[0px_-1px_3px_0px_rgba(0,0,0,0.1)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant transition-all duration-200 active:scale-[0.98] hover:bg-surface-container-highest dark:hover:bg-surface-variant p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-secondary-container dark:bg-secondary-container rounded-xl px-3 py-1 transition-all duration-200 active:scale-[0.98] shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="font-label-sm text-label-sm">Queue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant transition-all duration-200 active:scale-[0.98] hover:bg-surface-container-highest dark:hover:bg-surface-variant p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant transition-all duration-200 active:scale-[0.98] hover:bg-surface-container-highest dark:hover:bg-surface-variant p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Interaction Script -->
+<script>
+        // Simple scale micro-interaction for cards and buttons
+        document.querySelectorAll('.active\\:scale-95, .active\\:scale-\\[0\\.98\\]').forEach(el => {
+            el.addEventListener('click', () => {
+                el.classList.add('transition-transform');
+                setTimeout(() => el.classList.remove('scale-95', 'scale-[0.98]'), 100);
+            });
+        });
+    </script>
+</body></html>

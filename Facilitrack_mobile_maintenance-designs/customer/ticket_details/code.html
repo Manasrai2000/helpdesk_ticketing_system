@@ -1,0 +1,318 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#000000",
+                    "on-secondary-container": "#54647a",
+                    "secondary-container": "#d0e1fb",
+                    "tertiary-container": "#271901",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary": "#000000",
+                    "secondary": "#505f76",
+                    "primary-fixed": "#dae2fd",
+                    "inverse-surface": "#303032",
+                    "surface-container-high": "#eae7e9",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-background": "#1b1b1d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#98805d",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-bright": "#fcf8fa",
+                    "on-tertiary-fixed": "#271901",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0edef",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "outline-variant": "#c6c6cd",
+                    "primary-container": "#131b2e",
+                    "surface-dim": "#dcd9db",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-fixed": "#fcdeb5",
+                    "surface-tint": "#565e74",
+                    "surface": "#fcf8fa",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "outline": "#76777d",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-primary-container": "#7c839b",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-surface": "#1b1b1d",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf8fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "container-padding": "16px",
+                    "card-gap": "12px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-md": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            color: #1b1b1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4e2e4;
+            border-radius: 10px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #e4e2e4;
+        }
+        .timeline-line {
+            width: 2px;
+            background: #e4e2e4;
+            position: absolute;
+            left: 7px;
+            top: 24px;
+            bottom: 0;
+        }
+        .timeline-line-active {
+            background: #000000;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen items-center">
+<!-- Top App Bar -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-outline-variant dark:border-outline flex items-center justify-between px-container-padding h-16 max-w-[430px] mx-auto">
+<div class="flex items-center gap-3">
+<button class="active:scale-95 duration-100 hover:bg-surface-container-low p-2 rounded-full">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-h1 text-h1-mobile tracking-tight text-primary">Ticket Details #FC-8291</h1>
+</div>
+<button class="active:scale-95 duration-100 hover:bg-surface-container-low p-2 rounded-full">
+<span class="material-symbols-outlined text-secondary" data-icon="more_vert">more_vert</span>
+</button>
+</header>
+<main class="w-full max-w-[430px] flex-1 px-container-padding py-6 pb-32 space-y-6">
+<!-- Issue Summary Card -->
+<section class="space-y-3">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<h2 class="font-h2 text-h2 text-primary">Leaking Bathroom Tap</h2>
+<p class="font-body-sm text-body-sm text-secondary">Reported 2 hours ago • Building B, Floor 4</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-fixed-variant px-3 py-1 rounded-full font-label-sm text-label-sm">
+                    In Progress
+                </span>
+</div>
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-lowest">
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+                    The main tap in the executive bathroom (Suite 402) is experiencing a persistent high-pressure leak from the handle base. Maintenance required to prevent water damage to the vanity unit.
+                </p>
+</div>
+</section>
+<!-- Media Section (Bento-ish Thumbnails) -->
+<section class="space-y-3">
+<div class="flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-primary">Attachments</h3>
+<span class="font-label-sm text-label-sm text-secondary">3 Photos</span>
+</div>
+<div class="grid grid-cols-4 grid-rows-2 gap-2 h-40">
+<div class="col-span-2 row-span-2 relative rounded-lg overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" data-alt="A macro close-up of a sleek, chrome bathroom faucet with visible water droplets leaking from the joint. The lighting is crisp and professional, highlighting the metallic texture and the systematic order of a modern commercial facility. The background is slightly blurred to focus on the mechanical fault." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm_35S4GDxEfzCObZt-8sH_SPPBoUVEzHCBVjasBcIhUfWBq4A9_tVxY2Ut_bZUvGH5rNQGrNc1q1fFVNESUxAi9HGfVbdayKTOrHPBZMhgwQH9g4-km_F0ggBIEfrwGgdA5cmzZA4Am6htOwTTakbks7Bg7I_Z28lLkEcro7Unlf37E6CFiS1QL0FgzJH6j5ZOCjeaeAaQMnGGB79VrnetjUJiq7DpscrDmNpzckcnRSWusBcs_vBqNPke9oWg0MF0DcTClgn3kA">
+</div>
+<div class="col-span-2 row-span-1 relative rounded-lg overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" data-alt="A wide shot of a modern, minimalist executive bathroom interior with marble finishes and slate-grey tiles. The scene is illuminated by soft, recessed ceiling lights, maintaining a clean and calm professional aesthetic. The focus is on the vanity area where the leak is reported." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWbxetj0PS-H0zlcELMycEbtd5jqQt_LWNmU-6qKpSZ9MTM5mHt8BKBzUqtTz8lrESUbP5HccLNt9qMRd8P6FGbaI8KH8hzxLxmSTF5Ttf7n77UY3RDQU6TS4HDfcz73fdqAxay-7LzzpeDgvV6HGTL4Pl2Z-m1eBQAXqkG9JmO8i25g6-OzvAvF_TClDxTwW8dNjMn95cIqfTumrYn3aXfY5k5AyAFJgNHftZ-LuKzRjB7mzsAUikKlwNNnsCtlOxPiBYONjbjOE">
+</div>
+<div class="col-span-2 row-span-1 relative rounded-lg overflow-hidden border border-outline-variant group bg-surface-container-high flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-60" data-alt="A technician's toolbag open on a clean tiled floor, showing organized wrenches and plumbing supplies. The color palette is neutral with slate and chrome tones, emphasizing precision and reliability. The lighting is clear and focused on the task at hand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRpZQ_OnjrCO4AUfknkbgnvaV67J_u3jfujJHwMvztGv-EEbjxDcZrFXuYX_J53-155pEjkq1nq4PZndD1BEM2HrXcwHSvtTMd5Dc1b00dnytJcdtKYVGcRNS5dHpm8a4CVX5FES3HkuMRyId1iNwQk0f0FVuzLIlT9g1K9wVbXuOK-gUQaeEdPeCKmfjxPdhi6NPB8D2OHYD7ak8z-THuGf33cHufXCuL4RO_lImvIRYaJfy_2K9YeLMG7OFl5FKBkZkrjogUv4w">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-on-surface font-label-md text-label-md">+2 more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Assigned Technician Card -->
+<section class="space-y-3">
+<h3 class="font-h3 text-h3 text-primary">Assigned Technician</h3>
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a facility technician named John Doe, wearing a clean, dark navy maintenance uniform. He has a friendly but professional expression, conveying trust and systematic expertise. The background is a simple, neutral-toned office corridor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu58cVD5RlXd2OBHFWPMJOTNE7zb8zJPFt0RDcPsrUCY9beooumwfhWXj89Q_uxykJGbmWd9JOd9styTB7egATtkib12UUGWQmIkNzNF7N5UPrcf3eVyOwErH38fDiZUvWILd-RkjIaZQzrJIdYjyWklxYV7Jy_w2Qhbg2kJ1YfYJ7MXEYjWXSKrKyqEpQb3aZntspdUEtyMzes6PrUCb6UoEuvagU4osAWI9-8X72k7352hl6OteVSZzOdBbuVBQER9y0bUObVxw">
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">John Doe</p>
+<p class="font-body-sm text-body-sm text-secondary">Senior Maintenance Lead</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-outline flex items-center justify-center active:scale-90 transition-transform text-primary hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform hover:opacity-90 shadow-sm">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Progress Timeline (Shadcn Style) -->
+<section class="space-y-4">
+<h3 class="font-h3 text-h3 text-primary">Progress Timeline</h3>
+<div class="relative space-y-6 pl-2">
+<!-- Created (Checked) -->
+<div class="relative pl-8">
+<div class="timeline-line timeline-line-active"></div>
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[10px] text-white" style="font-variation-settings: 'wght' 700">check</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Ticket Created</p>
+<p class="font-body-sm text-body-sm text-secondary">Oct 24, 09:15 AM • Automated System</p>
+</div>
+</div>
+<!-- Assigned (Checked) -->
+<div class="relative pl-8">
+<div class="timeline-line timeline-line-active"></div>
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[10px] text-white" style="font-variation-settings: 'wght' 700">check</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Technician Assigned</p>
+<p class="font-body-sm text-body-sm text-secondary">Oct 24, 10:30 AM • Dispatcher: Sarah K.</p>
+</div>
+</div>
+<!-- In Progress (Active) -->
+<div class="relative pl-8">
+<div class="timeline-line"></div>
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-primary bg-white flex items-center justify-center z-10">
+<div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">In Progress</p>
+<p class="font-body-sm text-body-sm text-secondary">Oct 24, 11:45 AM • Technician on site</p>
+</div>
+</div>
+<!-- Verification (Upcoming) -->
+<div class="relative pl-8">
+<div class="timeline-line"></div>
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-outline-variant bg-white z-10"></div>
+<div>
+<p class="font-label-md text-label-md text-outline">Verification Pending</p>
+<p class="font-body-sm text-body-sm text-outline">Estimated completion today</p>
+</div>
+</div>
+<!-- Closed (Upcoming) -->
+<div class="relative pl-8 pb-2">
+<div class="absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-outline-variant bg-white z-10"></div>
+<div>
+<p class="font-label-md text-label-md text-outline">Ticket Closed</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="pt-4 flex gap-3">
+<button class="flex-1 py-3 px-4 rounded-xl border border-outline-variant bg-white text-primary font-label-md transition-all active:scale-95">
+                Add Note
+            </button>
+<button class="flex-1 py-3 px-4 rounded-xl bg-primary text-on-primary font-label-md transition-all active:scale-95 shadow-sm">
+                Mark as Resolved
+            </button>
+</div>
+</main>
+<!-- Bottom Nav Bar (Semantic: My Tickets is active) -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[430px] left-1/2 -translate-x-1/2 bg-surface dark:bg-background border-t border-outline-variant dark:border-outline shadow-sm flex justify-around items-center pt-2 pb-6 px-4">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-background font-semibold hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="Confirmation_Number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-label-sm text-label-sm">My Tickets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-sm text-label-sm">Notifications</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+
+        // Dynamic shadow for header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

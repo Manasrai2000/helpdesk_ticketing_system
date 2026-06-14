@@ -1,0 +1,310 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Task Detail Screen - FacilityOps</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background-color: #e4e2e4; /* outline-variant */
+        }
+        .timeline-item:last-child .timeline-line::before {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "secondary": "#505f76",
+                      "secondary-fixed": "#d3e4fe",
+                      "surface-variant": "#e4e2e4",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#dcd9db",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#131b2e",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#131b2e",
+                      "on-error": "#ffffff",
+                      "surface-container": "#f0edef",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "secondary-container": "#d0e1fb",
+                      "primary-fixed-dim": "#bec6e0",
+                      "tertiary-container": "#271901",
+                      "surface-container-highest": "#e4e2e4",
+                      "surface": "#fcf8fa",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "background": "#fcf8fa",
+                      "on-tertiary": "#ffffff",
+                      "outline": "#76777d",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "inverse-primary": "#bec6e0",
+                      "on-surface": "#1b1b1d",
+                      "on-primary-container": "#7c839b",
+                      "inverse-surface": "#303032",
+                      "surface-tint": "#565e74",
+                      "on-tertiary-container": "#98805d",
+                      "on-surface-variant": "#45464d",
+                      "tertiary-fixed": "#fcdeb5",
+                      "on-tertiary-fixed": "#271901",
+                      "outline-variant": "#c6c6cd",
+                      "tertiary": "#000000",
+                      "on-secondary-fixed": "#0b1c30",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-secondary-container": "#54647a",
+                      "surface-container-high": "#eae7e9",
+                      "surface-container-low": "#f6f3f5",
+                      "primary": "#000000",
+                      "on-background": "#1b1b1d",
+                      "surface-bright": "#fcf8fa",
+                      "primary-fixed": "#dae2fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "container-padding": "16px",
+                      "card-gap": "12px",
+                      "base": "4px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "mono-sm": ["Geist Mono"],
+                      "body-sm": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "h3": ["Inter"],
+                      "h2": ["Inter"]
+              },
+              "fontSize": {
+                      "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                      "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-sm antialiased pb-40">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center px-container-padding h-16 w-full fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-150 p-2 -ml-2 hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 font-bold text-primary">Task Details</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Technician Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOewt3EruvCcUTKggl71EvbNebfO0s8pVaCYtDb399QMXgBs03fkhOA8ePavO_9GFOSYecN1LbmoJ0QUyN8V17ZHKJWLFSxigBMl_rWr_iaC3s3wUPKcd8AesmM1km0voBBG2BXOtIAdgZCH8b2Xjwt2tq0O5aRfO3Vrbq2k8jPuYW20ieK81H7HdKbJ2XLVKHDwORphjh2AkR2enYOwKK43XGpehTQx87xqUZGrUb64stHYYqgDhGn2PumBC-iwcQJMMcq5FEYdc">
+</div>
+</header>
+<main class="mt-16 px-container-padding pt-4 space-y-4 max-w-lg mx-auto">
+<!-- Status Banner -->
+<div class="bg-primary-fixed border border-outline-variant rounded-xl p-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-on-primary-fixed/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed">assignment_late</span>
+</div>
+<div>
+<p class="font-label-sm text-on-primary-fixed-variant uppercase tracking-wider">Current Status</p>
+<p class="font-h3 text-h3 text-on-primary-fixed">Assigned</p>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all">
+                Update Status
+            </button>
+</div>
+<!-- Customer Information Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly corporate client in a bright, modern office setting. The lighting is soft and natural, emphasizing a high-end, light-mode aesthetic with clean white backgrounds and subtle slate-200 accents. The photography style is sharp, clean, and follows a minimalist professional enterprise visual language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAadox65TfUFuzGw8QKIOCjdRGWBlcyvYsOTI3e8FnJwxtqj_UjPMGtQ729b3mUFGOm3hGcA8h6SsexCA9-WlCT-KzcxhBiyra69uDYmOvpx3bwdqJUrTyN_ZvygLonAj6O8XQVYGb7AcYsaQM88_DJy9Y8vRRKgLL_bUBPqB8ZU3-CGVqDP2t7Mnw4kEOe06Mkl9HpZF8ihqXsvAxCGlC_4_65t-F96oNQNCq2md4cEqiJZkiUqD_8GqMG7xU1ZxCcnyTcwOgaFwE">
+</div>
+<div>
+<h2 class="font-h3 text-h3 text-on-surface">Johnathan Doe</h2>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm">
+<span class="material-symbols-outlined text-[16px]">apartment</span>
+                            Room 402 • West Wing
+                        </div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant w-full my-4"></div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-on-surface-variant">Asset ID</p>
+<p class="font-body-lg text-primary font-mono-sm">HVAC-UNIT-9920</p>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant">Priority</p>
+<p class="font-body-lg text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">priority_high</span> High
+                    </p>
+</div>
+</div>
+</div>
+<!-- Ticket Description -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<h3 class="font-label-md text-on-surface-variant mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">description</span> Description
+            </h3>
+<p class="font-body-lg text-on-surface leading-relaxed">
+                The AC unit in the main conference room is making a loud grinding noise and is no longer blowing cold air. It started approximately 2 hours ago during a board meeting. There is a small amount of moisture visible on the exterior casing.
+            </p>
+</div>
+<!-- Attachments Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">attach_file</span> Attachments (3)
+                </h3>
+<button class="text-primary font-label-sm hover:underline">View All</button>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-1">
+<div class="min-w-[120px] h-20 rounded-lg bg-surface-container overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A detailed, close-up photograph of an industrial HVAC unit's control panel, showing a small condensation leak. The image is captured with high-fidelity professional equipment, featuring clinical lighting that emphasizes the metallic textures of the slate-gray machinery. The style is industrial minimalism, consistent with a clean facility management aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsIEHsHk9d4LOCymaj2xBwjeIr4TinKQDv6pjazPRj4jnwmItCUdAPGIVV4hl7tSe9ADGoHsPjEE_87xDTqAlFyDSFxeHA4j5asZ6nq_LETbBRSdc3Jn8BvXfxVa_XJ3M8d0yGbTtDo1edtdhbmsmuYMuSQmIFdbZcNkdhKZZ9qzJJJ4l1Rf-G-y3-q7b1zDtJ7AT-swnX0DtMU16KY6JMvAlHNcGrNf4-IfZCGhn4MHxflIyWsGo-BakcBcRwOW3zsvFulBZwy6w">
+</div>
+<div class="min-w-[120px] h-20 rounded-lg bg-surface-container overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A wide-angle professional shot of a modern office ceiling installation where an air conditioning vent is visible. The scene is bright and airy, using a soft white and neutral gray palette. The composition is clean and orderly, showcasing the facility's well-maintained environment despite the technical issue." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_zimc9gawy2davFQB0MFv9QEzE8Vbfrwevn7VpTXiUnAZAe3Uj8UkVzkY4CbH9N-fkHENLFSd2OK6f-Vagop4L83pq3GN7fzYlofFr-phh1bpa5DS4AqQNyI-kijaYGR8R10pVFnP28AtnWhJWvcQbxrcNqXN4dbOUMPewEVG8dCV8ZImp0okxUMqFrgwMVWFG-atKhKmO1P_s0YN6EeSs1fzzktgbZCsYahQl9M4YIa5Us06M15wVQdvQl8FvHLWDAqH2QnoHvw">
+</div>
+<div class="min-w-[120px] h-20 rounded-lg bg-surface-container relative flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">videocam</span>
+<p class="absolute bottom-1 right-1 font-mono-sm text-[10px] bg-black/50 text-white px-1 rounded">0:12</p>
+</div>
+</div>
+</div>
+<!-- Progress Timeline -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<h3 class="font-label-md text-on-surface-variant mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span> Activity Timeline
+            </h3>
+<div class="space-y-0 relative">
+<!-- Step 1 -->
+<div class="timeline-item timeline-line relative pb-8 flex gap-4">
+<div class="relative z-10 w-4 h-4 rounded-full bg-primary flex items-center justify-center mt-1">
+<div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+</div>
+<div>
+<p class="font-label-md text-on-surface font-semibold">Technician Assigned</p>
+<p class="font-body-sm text-on-surface-variant">Today, 10:45 AM • Alex Rivera</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="timeline-item timeline-line relative pb-8 flex gap-4">
+<div class="relative z-10 w-4 h-4 rounded-full bg-outline-variant flex items-center justify-center mt-1"></div>
+<div>
+<p class="font-label-md text-on-surface">Ticket Confirmed</p>
+<p class="font-body-sm text-on-surface-variant">Today, 09:12 AM • Front Desk</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="timeline-item relative flex gap-4">
+<div class="relative z-10 w-4 h-4 rounded-full bg-outline-variant flex items-center justify-center mt-1"></div>
+<div>
+<p class="font-label-md text-on-surface">Ticket Created</p>
+<p class="font-body-sm text-on-surface-variant">Today, 08:30 AM • Johnathan Doe</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Action Bar -->
+<div class="fixed bottom-20 left-0 w-full px-container-padding py-4 bg-surface/80 backdrop-blur-md z-40">
+<div class="max-w-lg mx-auto flex gap-3">
+<button class="flex-1 bg-primary text-on-primary h-12 rounded-xl font-h3 flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+                Start Work
+            </button>
+<button class="w-12 h-12 bg-white border border-outline-variant rounded-xl flex items-center justify-center text-on-surface active:scale-95 transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-surface border-t border-outline-variant shadow-sm">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all rounded-lg px-3 py-1 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-secondary-container/50 rounded-lg px-3 py-1 cursor-pointer font-semibold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="font-label-sm text-label-sm">Tasks</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all rounded-lg px-3 py-1 cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 150);
+            });
+        });
+
+        // Simple scroll handling for TopAppBar shadow
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

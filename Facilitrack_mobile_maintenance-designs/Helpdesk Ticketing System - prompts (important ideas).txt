@@ -1,0 +1,477 @@
+initial design prompt: mere ko ek app ka UI designs banana hai jisame hum abhi ke lea 4 roles rakhenge
+
+1 role is customer - jisako tickets raise karne ka option denge ek form rahega or uss ticket ka details bhi dekh sakata hai ki usaka kya progress hai,
+2 role is technician - jisako kaam milega tickets ka
+3 role is middle man - jisaka basic kaam hai ki wo tickets ko technician ko assign karna
+4 role is admin - jisako saari improtant information dikhengi 
+
+ye app ka main role hai ki hum customers ki ambience se related problems ko resolve kar saken 
+example.
+* Customer ka room ka fan kharab ho gaya hai to wo ticket raise karega taki usape work ho jaega
+* Customer ka bathroom ka water tap kharab ho gaya to wo ticket raise karega taki usape work ho jaega
+
+ye ek mobile app rahega jisame customer ki profile information rahengi or login rahega, and middleman koi bhi ticket ko proper kon se department ke technician ki need hai usako assign karega and unassign bhi kar sakata hai,
+
+technician ko jo bhi task milega usake app me wo usape apana kaam karne chala jaega and usaka kaam ho jaane ke baad apana status update karega, or complete hone ka ek proof dega in image or video format ye mandetory hai ticket ko close karne ke lea, or finally ticket ko middleman check karke close puri tarike se karega.
+_____________________________________________________________________________________________
+_____________________________________________________________________________________________
+Design ke lea prompt:
+_____________________________________________________________________________________________
+_____________________________________________________________________________________________
+1:
+_____________________________________________________________________________________________
+Design a modern mobile application UI for a Facility Maintenance & Ticket Management System.
+
+Design Style:
+
+Use shadcn/ui design principles.
+Minimal, clean, modern, and premium look.
+Soft shadows, subtle borders, rounded corners.
+Professional enterprise-grade mobile app.
+Focus on usability and clarity.
+Mobile-first design.
+Use proper spacing and typography hierarchy.
+Avoid unnecessary colors and clutter.
+Use status badges, cards, timelines, and clean forms.
+Use modern icons from Lucide Icons.
+Create realistic sample data.
+Follow Android and iOS design best practices.
+Use light theme.
+Design should be production-ready and developer-friendly.
+Every screen should include loading, empty, and populated states where applicable.
+Use card-based layouts.
+Include proper navigation patterns.
+Use modern dashboard widgets.
+Use shadcn-inspired buttons, inputs, selects, dialogs, sheets, tabs, and badges.
+
+Application Purpose:
+The application is used to manage facility maintenance issues such as fan repair, electrical issues, plumbing problems, bathroom tap issues, AC issues, cleaning issues, and other maintenance requests.
+
+
+Using the global design instructions, design the complete Customer Mobile Application flow.
+
+Customer Features:
+
+1. Login Screen
+
+* Email id login
+* Password login
+* Forgot password
+
+2. Dashboard
+
+* Welcome card
+* Room information
+* Active tickets count
+* Closed tickets count
+* Quick action buttons
+
+Quick Ticket Categories:
+
+* Electrical
+* Plumbing
+* Fan Issue
+* AC Issue
+* Water Leakage
+* Cleaning
+* Other
+
+3. Raise Ticket Screen
+   Fields:
+
+* Category
+* Title
+* Description
+* Priority
+* Upload Photos
+* Upload Video
+* Submit Button
+
+4. My Tickets Screen
+
+* Active tickets
+* Closed tickets
+* Search ticket
+* Filter by status
+
+Ticket Card:
+
+* Ticket Number
+* Issue Title
+* Status Badge
+* Date
+* Assigned Technician
+
+5. Ticket Detail Screen
+
+Include:
+
+* Ticket information
+* Issue description
+* Uploaded media
+* Technician details
+* Progress timeline
+
+Timeline:
+
+* Created
+* Assigned
+* In Progress
+* Verification Pending
+* Closed
+
+6. Notifications Screen
+
+Examples:
+
+* Ticket Assigned
+* Technician Started Work
+* Work Completed
+* Ticket Closed
+
+7. Profile Screen
+
+* User details
+* Room information
+* Contact details
+* Change password
+* Logout
+
+Generate complete mobile UI screens with realistic layouts and interactions.
+
+_____________________________________________________________________________________________
+_____________________________________________________________________________________________
+2:
+_____________________________________________________________________________________________
+Design a modern mobile application UI for a Facility Maintenance & Ticket Management System.
+
+Design Style:
+
+Use shadcn/ui design principles.
+Minimal, clean, modern, and premium look.
+Soft shadows, subtle borders, rounded corners.
+Professional enterprise-grade mobile app.
+Focus on usability and clarity.
+Mobile-first design.
+Use proper spacing and typography hierarchy.
+Avoid unnecessary colors and clutter.
+Use status badges, cards, timelines, and clean forms.
+Use modern icons from Lucide Icons.
+Create realistic sample data.
+Follow Android and iOS design best practices.
+Use light theme.
+Design should be production-ready and developer-friendly.
+Every screen should include loading, empty, and populated states where applicable.
+Use card-based layouts.
+Include proper navigation patterns.
+Use modern dashboard widgets.
+Use shadcn-inspired buttons, inputs, selects, dialogs, sheets, tabs, and badges.
+
+Application Purpose:
+The application is used to manage facility maintenance issues such as fan repair, electrical issues, plumbing problems, bathroom tap issues, AC issues, cleaning issues, and other maintenance requests.
+
+
+Using the global design instructions, design the complete Technician Mobile Application.
+
+Technician Goal:
+Receive assigned tickets, perform maintenance work, upload proof, and submit work for verification.
+
+Screens:
+
+1. Technician Dashboard
+   Cards:
+
+* Assigned Tasks
+* In Progress
+* Completed Today
+* Pending Verification
+
+2. Task List Screen
+   Filters:
+
+* Assigned
+* In Progress
+* Completed
+
+Task Card:
+
+* Ticket Number
+* Customer Name
+* Room Number
+* Category
+* Priority
+
+3. Task Detail Screen
+
+Show:
+
+* Customer Information
+* Room Number
+* Contact Information
+* Ticket Description
+* Attachments
+* Timeline
+
+Actions:
+
+* Accept Task
+* Start Work
+* Mark In Progress
+
+4. Work Completion Screen
+
+Mandatory Requirements:
+
+* Work Notes
+* Before Photos
+* After Photos
+* Video Proof
+
+Validation:
+Ticket cannot be completed without proof.
+
+5. Upload Evidence Screen
+
+Support:
+
+* Camera Capture
+* Gallery Upload
+* Video Recording
+
+6. Submit For Verification Screen
+
+Status:
+Verification Pending
+
+Show:
+
+* Uploaded Photos
+* Uploaded Videos
+* Work Summary
+
+Generate all screens with a highly productive field-worker experience.
+_____________________________________________________________________________________________
+_____________________________________________________________________________________________
+3:
+_____________________________________________________________________________________________
+Design a modern mobile application UI for a Facility Maintenance & Ticket Management System.
+
+Design Style:
+
+Use shadcn/ui design principles.
+Minimal, clean, modern, and premium look.
+Soft shadows, subtle borders, rounded corners.
+Professional enterprise-grade mobile app.
+Focus on usability and clarity.
+Mobile-first design.
+Use proper spacing and typography hierarchy.
+Avoid unnecessary colors and clutter.
+Use status badges, cards, timelines, and clean forms.
+Use modern icons from Lucide Icons.
+Create realistic sample data.
+Follow Android and iOS design best practices.
+Use light theme.
+Design should be production-ready and developer-friendly.
+Every screen should include loading, empty, and populated states where applicable.
+Use card-based layouts.
+Include proper navigation patterns.
+Use modern dashboard widgets.
+Use shadcn-inspired buttons, inputs, selects, dialogs, sheets, tabs, and badges.
+
+Application Purpose:
+The application is used to manage facility maintenance issues such as fan repair, electrical issues, plumbing problems, bathroom tap issues, AC issues, cleaning issues, and other maintenance requests.
+
+Using the global design instructions, design the complete Dispatcher Mobile Application.
+
+Dispatcher Responsibilities:
+Review incoming tickets, assign technicians, monitor progress, verify completed work, and close tickets.
+
+Screens:
+
+1. Dispatcher Dashboard
+
+Cards:
+
+* Total Tickets
+* New Tickets
+* Assigned Tickets
+* In Progress
+* Verification Pending
+* Closed Today
+
+2. Ticket Queue Screen
+
+Filters:
+
+* New
+* Assigned
+* In Progress
+* Verification Pending
+* Closed
+
+Search:
+
+* Ticket Number
+* Customer Name
+
+3. Ticket Detail Screen
+
+Show:
+
+* Customer Information
+* Room Information
+* Ticket Information
+* Uploaded Images
+* Uploaded Videos
+* Ticket Timeline
+
+Actions:
+
+* Assign Technician
+* Reassign Technician
+
+4. Assign Technician Screen
+
+Display:
+
+* Technician List
+* Department
+* Current Workload
+* Availability Status
+
+Actions:
+
+* Assign
+* Reassign
+
+5. Verification Screen
+
+Show:
+
+* Before Images
+* After Images
+* Video Proof
+* Technician Notes
+
+Actions:
+
+* Approve and Close Ticket
+* Reject and Reopen Ticket
+
+6. Activity Feed Screen
+
+Show:
+
+* Ticket Updates
+* Technician Updates
+* Assignment History
+
+Generate modern operations-focused screens suitable for facility management teams.
+_____________________________________________________________________________________________
+_____________________________________________________________________________________________
+4:
+_____________________________________________________________________________________________
+Design a modern mobile application UI for a Facility Maintenance & Ticket Management System.
+
+Design Style:
+
+Use shadcn/ui design principles.
+Minimal, clean, modern, and premium look.
+Soft shadows, subtle borders, rounded corners.
+Professional enterprise-grade mobile app.
+Focus on usability and clarity.
+Mobile-first design.
+Use proper spacing and typography hierarchy.
+Avoid unnecessary colors and clutter.
+Use status badges, cards, timelines, and clean forms.
+Use modern icons from Lucide Icons.
+Create realistic sample data.
+Follow Android and iOS design best practices.
+Use light theme.
+Design should be production-ready and developer-friendly.
+Every screen should include loading, empty, and populated states where applicable.
+Use card-based layouts.
+Include proper navigation patterns.
+Use modern dashboard widgets.
+Use shadcn-inspired buttons, inputs, selects, dialogs, sheets, tabs, and badges.
+
+Application Purpose:
+The application is used to manage facility maintenance issues such as fan repair, electrical issues, plumbing problems, bathroom tap issues, AC issues, cleaning issues, and other maintenance requests.
+
+Using the global design instructions, design the complete Admin Mobile Application.
+
+Admin Responsibilities:
+Monitor system health, manage users, review analytics, and oversee operations.
+
+Screens:
+
+1. Admin Dashboard
+
+Metrics:
+
+* Total Customers
+* Total Technicians
+* Total Dispatchers
+* Open Tickets
+* Closed Tickets
+* Average Resolution Time
+
+Charts:
+
+* Tickets by Department
+* Tickets by Priority
+* Tickets by Technician
+
+2. User Management
+
+Tabs:
+
+* Customers
+* Technicians
+* Dispatchers
+
+Features:
+
+* Add User
+* Edit User
+* Suspend User
+* View Profile
+
+3. Ticket Monitoring Screen
+
+Filters:
+
+* Status
+* Department
+* Priority
+* Technician
+
+4. Reports Screen
+
+Reports:
+
+* Ticket Performance
+* Resolution Time
+* Technician Productivity
+* Department Analysis
+
+5. System Settings
+
+Options:
+
+* Categories
+* Priorities
+* Notification Rules
+* User Roles
+
+6. Audit Logs Screen
+
+Show:
+
+* Ticket Actions
+* User Actions
+* Assignment Changes
+* Login Activity
+
+Generate executive-level dashboards and analytics-focused mobile screens using shadcn-inspired design language.
+_____________________________________________________________________________________________

@@ -1,0 +1,264 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .notification-card:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease-out;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#000000",
+                        "on-secondary-container": "#54647a",
+                        "secondary-container": "#d0e1fb",
+                        "tertiary-container": "#271901",
+                        "surface-variant": "#e4e2e4",
+                        "surface-container-low": "#f6f3f5",
+                        "tertiary": "#000000",
+                        "secondary": "#505f76",
+                        "primary-fixed": "#dae2fd",
+                        "inverse-surface": "#303032",
+                        "surface-container-high": "#eae7e9",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-fixed": "#131b2e",
+                        "on-surface-variant": "#45464d",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-background": "#1b1b1d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#98805d",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-bright": "#fcf8fa",
+                        "on-tertiary-fixed": "#271901",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f0edef",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f3f0f2",
+                        "outline-variant": "#c6c6cd",
+                        "primary-container": "#131b2e",
+                        "surface-dim": "#dcd9db",
+                        "primary-fixed-dim": "#bec6e0",
+                        "secondary-fixed": "#d3e4fe",
+                        "tertiary-fixed": "#fcdeb5",
+                        "surface-tint": "#565e74",
+                        "surface": "#fcf8fa",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "inverse-primary": "#bec6e0",
+                        "outline": "#76777d",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-primary-container": "#7c839b",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-surface": "#1b1b1d",
+                        "on-primary": "#ffffff",
+                        "background": "#fcf8fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "4px",
+                        "container-padding": "16px",
+                        "card-gap": "12px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "label-md": ["Inter"],
+                        "mono-sm": ["Geist Mono"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-lg overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-outline-variant dark:border-outline">
+<div class="flex items-center justify-between px-container-padding h-16 w-full max-w-[430px] mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-on-background" data-icon="settings_remote">settings_remote</span>
+<h1 class="text-h1 font-h1 text-primary dark:text-on-background tracking-tight">Notifications</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined text-secondary" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<main class="max-w-[430px] mx-auto px-container-padding pt-6 pb-32 min-h-screen">
+<!-- Actionable Filters -->
+<div class="flex gap-2 mb-8 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md whitespace-nowrap shadow-sm">
+                All
+            </button>
+<button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant text-secondary rounded-full font-label-md text-label-md whitespace-nowrap">
+                Tickets
+            </button>
+<button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant text-secondary rounded-full font-label-md text-label-md whitespace-nowrap">
+                Team
+            </button>
+<button class="px-4 py-2 bg-surface-container-lowest border border-outline-variant text-secondary rounded-full font-label-md text-label-md whitespace-nowrap">
+                Alerts
+            </button>
+</div>
+<!-- Section: Today -->
+<section class="mb-8">
+<h2 class="font-label-sm text-label-sm uppercase tracking-widest text-outline mb-4 px-1">Today</h2>
+<div class="space-y-card-gap">
+<!-- Notification 1 -->
+<div class="notification-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md items-start shadow-[0px_1px_3px_0px_rgba(0,0,0,0.05)]">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-secondary-fixed" data-icon="assignment_ind">assignment_ind</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<p class="font-h3 text-body-lg text-primary leading-tight">Ticket #FC-8291 Assigned to John Doe</p>
+<span class="font-label-sm text-label-sm text-outline flex-shrink-0 ml-2">10m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">A new HVAC maintenance ticket has been delegated to your primary technician.</p>
+<div class="mt-3 flex gap-2">
+<button class="px-3 py-1.5 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm">View Ticket</button>
+</div>
+</div>
+</div>
+<!-- Notification 2 -->
+<div class="notification-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md items-start shadow-[0px_1px_3px_0px_rgba(0,0,0,0.05)] opacity-90">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="play_circle">play_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<p class="font-h3 text-body-lg text-primary leading-tight">Technician John Doe started work</p>
+<span class="font-label-sm text-label-sm text-outline flex-shrink-0 ml-2">2h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">On-site activity detected for #FC-8291. Clock-in confirmed via GPS.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Yesterday -->
+<section>
+<h2 class="font-label-sm text-label-sm uppercase tracking-widest text-outline mb-4 px-1">Yesterday</h2>
+<div class="space-y-card-gap">
+<!-- Notification 3 -->
+<div class="notification-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md items-start shadow-[0px_1px_2px_0px_rgba(0,0,0,0.03)] grayscale-[0.2]">
+<div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-emerald-700" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<p class="font-h3 text-body-lg text-primary leading-tight">Work Completed for #FC-7112</p>
+<span class="font-label-sm text-label-sm text-outline flex-shrink-0 ml-2">Yesterday</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Facility inspection completed successfully. All benchmarks reached for floor 4 sanitation.</p>
+<div class="mt-4 p-3 bg-surface rounded-lg border border-outline-variant flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed, professional photograph of a clean industrial facility interior with gleaming polished concrete floors and modern lighting. The aesthetic is ultra-modern and minimalist, emphasizing systematic order and professional maintenance with a sophisticated slate and white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX5YsV5Pn8VN1RZ0RT2YK1InEwX71JXLZhDg5XYcNy5M5PI8jdL0d8gdSLVD5MfqBlPnmKYSr9K5sgU1tScPShRtZmI63UrxEcrqgKF9bBMMtAV7RVLh-V8tZ3qxQYwoCzbDq__7A2eqzSQn-3YNEsaHpoNWzdL4LAgclYO80ylJZur4jHdYufgGc7NzyXB7pNgEgt1oyjssvUMutaMrn2f4mpQ_TjYsyV0dXojyp3sJrEB_6kQKjWtxrpqrtmSnoLHPIKjxh4oX8">
+</div>
+<span class="font-label-sm text-label-sm text-primary">Attachment: Final_Report.pdf</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Empty State Illustration Placeholder (Subtle) -->
+<div class="mt-12 text-center opacity-40">
+<span class="material-symbols-outlined text-[48px]" data-icon="notifications_paused">notifications_paused</span>
+<p class="mt-2 font-label-sm text-label-sm">No more notifications for today</p>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[430px] left-1/2 -translate-x-1/2 bg-surface dark:bg-background border-t border-outline-variant dark:border-outline shadow-sm">
+<div class="flex justify-around items-center pt-2 pb-6 px-4">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- My Tickets -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="Confirmation_Number">confirmation_number</span>
+<span class="font-label-sm text-label-sm mt-1">My Tickets</span>
+</a>
+<!-- Notifications (Active) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-background font-semibold hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<div class="relative">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="font-label-sm text-label-sm mt-1">Notifications</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interactions for notification cards
+        document.querySelectorAll('.notification-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Flash effect
+                this.classList.add('bg-surface-container');
+                setTimeout(() => {
+                    this.classList.remove('bg-surface-container');
+                }, 150);
+            });
+        });
+
+        // Hide bottom nav on scroll down, show on scroll up (optional UX touch)
+        let lastScrollTop = 0;
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                nav.style.transform = 'translate(-50%, 100%)';
+                nav.style.transition = 'transform 0.3s ease-in-out';
+            } else {
+                nav.style.transform = 'translate(-50%, 0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body></html>

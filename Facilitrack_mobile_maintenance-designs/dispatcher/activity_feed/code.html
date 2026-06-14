@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Activity Feed - FacilityFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-tertiary-fixed": "#271901",
+                    "outline-variant": "#c6c6cd",
+                    "tertiary": "#000000",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-tertiary-container": "#98805d",
+                    "on-surface-variant": "#45464d",
+                    "on-background": "#1b1b1d",
+                    "surface-bright": "#fcf8fa",
+                    "primary-fixed": "#dae2fd",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-secondary-container": "#54647a",
+                    "surface-container-high": "#eae7e9",
+                    "surface-container-low": "#f6f3f5",
+                    "primary": "#000000",
+                    "outline": "#76777d",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "on-surface": "#1b1b1d",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "background": "#fcf8fa",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#565e74",
+                    "on-primary-container": "#7c839b",
+                    "inverse-surface": "#303032",
+                    "on-primary-fixed": "#131b2e",
+                    "on-error": "#ffffff",
+                    "surface-container": "#f0edef",
+                    "inverse-on-surface": "#f3f0f2",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fcf8fa",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "secondary-container": "#d0e1fb",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary-container": "#271901",
+                    "surface-container-highest": "#e4e2e4",
+                    "secondary": "#505f76",
+                    "secondary-fixed": "#d3e4fe",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dcd9db",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e4e2e4",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "sm": "8px",
+                    "container-padding": "16px",
+                    "card-gap": "12px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fcf8fa;
+            color: #1b1b1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .activity-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+        }
+        .activity-card:active {
+            transform: scale(0.98);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4e2e4;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex justify-center items-start min-h-screen">
+<!-- Mobile-First Fixed-Width Shell -->
+<div class="relative w-full max-w-[430px] min-h-screen bg-background shadow-2xl overflow-hidden flex flex-col">
+<!-- TopAppBar (From JSON) -->
+<header class="fixed top-0 w-full max-w-[430px] z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center px-container-padding h-16">
+<div class="flex items-center gap-sm transition-transform duration-200 active:scale-95">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-h2">precision_manufacturing</span>
+<h1 class="font-h1 text-h1 text-primary dark:text-primary-fixed-dim tracking-tight">FacilityFlow</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">search</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant bg-surface-container-high transition-transform duration-200 active:scale-95">
+<img alt="Dispatcher Profile" class="w-full h-full object-cover" data-alt="Close up professional portrait of a facilities operations dispatcher, clean-shaven, wearing a navy blue tech company polo, soft studio lighting, high resolution photography, professional corporate headshot style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChftp49ANdanTj87ixe0ktgK5nISerIFKdtnlX-0UGBbYgBJbzKPwLeKWUswiWBI2YAOWACo9gJti-TMRu2NTiIMGVnL_IMLGLrFDV34h7yCB0hrl8-dsI3nz4UaYPXrS-pF5b3TDBw2NBP5rWrRXgK6uHysfl3Rn_qltTHVurCbC2SOFhj4FSbGCet0LYxgj3lShJ9frQCPLRLXkNq2Q0E7_dywb0kldctEI4ndaaRtQ7VEaFCBnRuqj1dxW1938oolpQEFLxsz8"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="flex-1 pt-20 pb-24 px-container-padding overflow-y-auto custom-scrollbar">
+<!-- Date Header -->
+<div class="flex justify-between items-center mb-md mt-sm">
+<h2 class="font-h2 text-h2 text-on-surface">Activity Feed</h2>
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-2 py-1 rounded-full text-on-surface-variant">Today</span>
+</div>
+<!-- Feed Container -->
+<div class="space-y-card-gap">
+<!-- Activity Item: Technician Alex -->
+<div class="activity-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1)] flex gap-md relative">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="flex-1 space-y-xs">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface leading-tight">
+<span class="font-bold">Alex Rivera</span> started work on <span class="text-primary font-mono-sm font-semibold">#FC-8291</span>
+</p>
+<span class="font-mono-sm text-label-sm text-outline shrink-0 ml-sm">2m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">HVAC Maintenance • West Wing Floor 2</p>
+</div>
+</div>
+<!-- Activity Item: New Ticket Room 402 -->
+<div class="activity-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1)] flex gap-md">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+</div>
+<div class="flex-1 space-y-xs">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface leading-tight">
+                                New ticket <span class="text-primary font-mono-sm font-semibold">#FC-9012</span> raised by <span class="font-bold">Room 402</span>
+</p>
+<span class="font-mono-sm text-label-sm text-outline shrink-0 ml-sm">14m ago</span>
+</div>
+<div class="flex items-center gap-xs mt-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-error-container text-[10px] font-bold text-error uppercase tracking-wider">Urgent</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Water leak reported near main panel.</p>
+</div>
+</div>
+</div>
+<!-- Activity Item: Assignment Changed -->
+<div class="activity-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1)] flex gap-md">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swap_horiz</span>
+</div>
+<div class="flex-1 space-y-xs">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface leading-tight">
+                                Assignment changed for <span class="text-primary font-mono-sm font-semibold">#FC-8304</span>
+</p>
+<span class="font-mono-sm text-label-sm text-outline shrink-0 ml-sm">45m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">Reassigned from Marcus to Sarah (Shift Overlap)</p>
+</div>
+</div>
+<!-- Section Divider -->
+<div class="flex items-center gap-md py-sm">
+<div class="h-[1px] bg-outline-variant flex-1"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">Yesterday</span>
+<div class="h-[1px] bg-outline-variant flex-1"></div>
+</div>
+<!-- Activity Item: Completion -->
+<div class="activity-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1)] flex gap-md">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 space-y-xs">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface leading-tight">
+<span class="font-bold">Sarah Chen</span> closed <span class="text-primary font-mono-sm font-semibold">#FC-8100</span>
+</p>
+<span class="font-mono-sm text-label-sm text-outline shrink-0 ml-sm">18h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lighting fixture replacement completed in Lobby B.</p>
+</div>
+</div>
+<!-- Activity Item: Image Upload -->
+<div class="activity-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1)] space-y-md">
+<div class="flex gap-md">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">image</span>
+</div>
+<div class="flex-1 space-y-xs">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-on-surface leading-tight">
+                                    Photo update added to <span class="text-primary font-mono-sm font-semibold">#FC-8222</span>
+</p>
+<span class="font-mono-sm text-label-sm text-outline shrink-0 ml-sm">20h ago</span>
+</div>
+</div>
+</div>
+<div class="w-full h-32 rounded-lg overflow-hidden bg-surface-container">
+<img alt="Site Inspection" class="w-full h-full object-cover grayscale contrast-125" data-alt="A professional architectural interior photo of a mechanical room in a high-tech facility. Shiny steel pipes, color-coded valves, and clean concrete floors create an atmosphere of systematic order and modern industrial efficiency. The lighting is crisp and bright, highlighting the metallic textures and professional maintenance standards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5Im18RtFT4kz-K6QfpUWp9ADA9RZakGARXddrPiZiFKx-53qC7jFg3uSEs5yv8XkHuNbnm7j0MUIFhgjv0a2IymLdE-cYU9JyRuTwFLXh2TAMZR10eWtFMWe6iQBwSAfwAck-2H2NRkrU_JY0Z9Xy8r1yxM0XXiVUJv8osGvS_tV06G-4OdVVJN7xmH2SoQzm8og4iPvwcRtGfPJxPXipJ_smid6RirKGM9CDZ5CCteGwfYLRDGhUcF410271AYroDI_yro_QhsM"/>
+</div>
+</div>
+</div>
+<!-- End of list spacer -->
+<div class="h-8"></div>
+</main>
+<!-- BottomNavBar (From JSON) -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] h-20 bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-[0px_-1px_3px_0px_rgba(0,0,0,0.1)] flex justify-around items-center px-md z-50 rounded-t-xl">
+<!-- Dashboard -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant transition-all duration-200 active:scale-[0.98] hover:bg-surface-container-highest px-3 py-1">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</button>
+<!-- Queue -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant transition-all duration-200 active:scale-[0.98] hover:bg-surface-container-highest px-3 py-1">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-label-sm text-label-sm">Queue</span>
+</button>
+<!-- Activity (ACTIVE) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-secondary-container dark:bg-secondary-container rounded-xl px-4 py-1 transition-all duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-sm text-label-sm">Activity</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant transition-all duration-200 active:scale-[0.98] hover:bg-surface-container-highest px-3 py-1">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<!-- Micro-interaction JavaScript -->
+<script>
+            // Simple feed pull-to-refresh simulation / entry animation
+            document.addEventListener('DOMContentLoaded', () => {
+                const cards = document.querySelectorAll('.activity-card');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 80);
+                });
+            });
+
+            // Tab highlighting logic simulation
+            const navButtons = document.querySelectorAll('nav button');
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    navButtons.forEach(b => {
+                        b.classList.remove('bg-secondary-container', 'text-primary', 'dark:text-primary-fixed-dim', 'rounded-xl', 'px-4');
+                        b.classList.add('text-secondary', 'dark:text-on-secondary-fixed-variant', 'px-3');
+                        const icon = b.querySelector('.material-symbols-outlined');
+                        if(icon) icon.style.fontVariationSettings = "'FILL' 0";
+                    });
+                    btn.classList.add('bg-secondary-container', 'text-primary', 'dark:text-primary-fixed-dim', 'rounded-xl', 'px-4');
+                    btn.classList.remove('text-secondary', 'dark:text-on-secondary-fixed-variant', 'px-3');
+                    const activeIcon = btn.querySelector('.material-symbols-outlined');
+                    if(activeIcon) activeIcon.style.fontVariationSettings = "'FILL' 1";
+                });
+            });
+        </script>
+</div>
+</body></html>

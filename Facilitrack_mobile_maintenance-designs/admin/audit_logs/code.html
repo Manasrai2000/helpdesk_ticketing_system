@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#98805d",
+                    "surface": "#fcf8fa",
+                    "surface-container-low": "#f6f3f5",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "tertiary": "#000000",
+                    "on-surface-variant": "#45464d",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#271901",
+                    "surface-dim": "#dcd9db",
+                    "on-secondary-container": "#54647a",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#565e74",
+                    "surface-container-highest": "#e4e2e4",
+                    "surface-container-high": "#eae7e9",
+                    "secondary": "#505f76",
+                    "inverse-surface": "#303032",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#fcdeb5",
+                    "tertiary-container": "#271901",
+                    "primary": "#000000",
+                    "outline-variant": "#c6c6cd",
+                    "surface-bright": "#fcf8fa",
+                    "secondary-container": "#d0e1fb",
+                    "on-primary-fixed": "#131b2e",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-primary-container": "#7c839b",
+                    "inverse-primary": "#bec6e0",
+                    "outline": "#76777d",
+                    "on-background": "#1b1b1d",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#dae2fd",
+                    "secondary-fixed": "#d3e4fe",
+                    "background": "#fcf8fa",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container": "#f0edef",
+                    "on-secondary-fixed": "#0b1c30",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-surface": "#1b1b1d",
+                    "inverse-on-surface": "#f3f0f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "card-gap": "12px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "container-padding": "16px"
+            },
+            "fontFamily": {
+                    "h1": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h2": ["Inter"],
+                    "h3": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fcf8fa;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .timeline-line {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #e4e2e4;
+      }
+      .timeline-node {
+        position: absolute;
+        left: 16px;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #1b1b1d;
+        z-index: 10;
+        border: 2px solid #ffffff;
+      }
+      .glass-effect {
+        backdrop-filter: blur(12px);
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface border-b border-surface-container-highest shadow-sm h-16 flex items-center justify-between px-container-padding transition-all duration-200">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Admin Profile Photo" class="w-full h-full object-cover" data-alt="A professional headshot of a high-level administrator in a modern corporate setting. The subject is wearing a crisp white shirt and a dark blazer, looking confident and approachable. The background is a blurred office interior with soft natural lighting and a palette of slate greys and cool whites, echoing a premium facility management aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQeHekdBy1XBZWWV07l2jMfZ4M3RqcjwlV1VzOdYXnb7oM8CkQh4tgQNG4RwBqbhhD9G30ve1_0Wu61vLx1YVU-GBzNuYfXoxQ9WITkKrqKOubROnmW45IpK7ZWXbhCHS8MxFnoH6U1XGHgQvVJi7IIyXK2CoYmhlg8Wr-tUaBf0uS1y1ErHgHsCYCtfij1zWlIYSM6ovTv5FL9Z57rrGY5ERioKYz_-xwk5LPvgvqiEAxgatXKMh16XY1nmEXAAJRuPNKTVu402A"/>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface">FacilityFlow</h1>
+</div>
+<button class="material-symbols-outlined text-primary transition-all duration-200 active:scale-95 hover:bg-surface-container-low p-2 rounded-full">notifications</button>
+</header>
+<main class="max-w-md mx-auto pb-32 pt-6 px-container-padding">
+<!-- Search & Filter Controls -->
+<section class="space-y-4 mb-8">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-sm text-body-sm outline-none shadow-sm" placeholder="Search audit logs..." type="text"/>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">Date Range</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 px-2 font-label-md text-label-md appearance-none focus:ring-1 focus:ring-primary outline-none">
+<option>Today</option>
+<option>7 Days</option>
+<option>30 Days</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">User Role</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 px-2 font-label-md text-label-md appearance-none focus:ring-1 focus:ring-primary outline-none">
+<option>All Roles</option>
+<option>Admin</option>
+<option>Technician</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">Action Type</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 px-2 font-label-md text-label-md appearance-none focus:ring-1 focus:ring-primary outline-none">
+<option>All Types</option>
+<option>Tickets</option>
+<option>System</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Audit Timeline -->
+<div class="relative">
+<div class="timeline-line"></div>
+<div class="space-y-8">
+<!-- Log Entry 1 -->
+<div class="relative pl-10">
+<div class="timeline-node"></div>
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-4 shadow-sm hover:border-outline transition-all duration-200">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-secondary-container">
+<img alt="Admin" class="w-full h-full object-cover" data-alt="A professional avatar of a male administrator in a minimalist style, set against a clean, light-mode background. The color scheme is dominated by slate-900 and cool grey tones to represent precision and enterprise trust. High-resolution digital art with soft studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_JI-MQ6UAYvOS7zmIq-xBaoxH-_CLRqs3eEJ6NCI3IxWMGRa-LkKFByJPJqLO5EOuw8ZhVLbFXFue6v19J5Nxg0H597WUFYfpWLp0iHAg_RVbzRv6P_NkRc6EZqfJD11d7OZ2hr-IfFynwrUPdvzQfmO25g3ySBv6szliKMi3nGuCcBGI3Rq2mXFVNQ98oOZcHAgLbRxE9wY6BoO9lZb5ke2-jjLyJMEz05_Rky85UdU7c9mRp81cG5MHXYehZtr60kf5o2ejVMw"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Admin</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">2m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">
+<span class="font-semibold">Ticket #FC-9012</span> reassigned to <span class="text-primary font-medium">Sarah Chen</span>
+</p>
+<div class="flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">Ticket</span>
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">Update</span>
+</div>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="relative pl-10">
+<div class="timeline-node !bg-outline"></div>
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-4 shadow-sm hover:border-outline transition-all duration-200">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-primary-fixed">
+<img alt="Alex Rivera" class="w-full h-full object-cover" data-alt="A portrait of a facility technician wearing a clean grey uniform. The setting is a brightly lit, modern commercial facility hallway with soft slate and steel accents. The mood is professional and efficient, captured in a clean, sharp, architectural photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMUE9vuSeRUhXE04t8xRJ7BIUNOZqvXGNNoRX7stUByV7FnI4Cjf49B6bbJhGcVyXGkiXo6SyUaau5dJHR17V9XQMeQjWwugnAsiiJO9Eh0GCP4G9h3fCq23eH6837lHnCZnfeBIuy3hERPmMZudJ-jkdVE0QigpS61iEk5tXwSY_CQzE1VFPiwfTdBtMUOukrf6tI78KUTONJGCXhNNS2snp4qHXZSsZDYt8995rDMDNbY61r-F9UHrtNy7aYbAvkQBglXetOhmU"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Alex Rivera</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">15m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">
+                            Technician <span class="font-semibold">Alex Rivera</span> logged into the system
+                        </p>
+<div class="flex gap-2">
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">Security</span>
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">Auth</span>
+</div>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="relative pl-10">
+<div class="timeline-node"></div>
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-4 shadow-sm hover:border-outline transition-all duration-200">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-secondary-container">
+<img alt="Admin" class="w-full h-full object-cover" data-alt="A minimalist profile icon for an administrator. The design features a professional individual in professional attire, rendered with a clean and modern aesthetic. The palette is muted with slate and charcoal tones, emphasizing a high-end enterprise atmosphere with lots of whitespace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3t2BA-1ZWKgArip3Fhm9JLXvfiUEtPFeCeRyGRMyBJPOtSRrkbgbVcAG8l2ezNF4mIxHMnQdtyBKqhSZREn3wSZnmGgpsoJSGyrbvVi8Ldvk3EXj-oUCdnfTLxGBQ2YU7ufoQF-BpcVu-ElBuDDwIBOiQmHyMbxwVQVSzJ9M_4dPPD83RRVJjLSZlmTUl6BETdxQPrfcB9pUr9unKdxoZ8w48-bbxFJQPYMuSmPIsFI2c2F20RhQaNesMCVMVZbkGGvYD1UH8AR0"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Admin</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">1h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">
+                            New Category <span class="bg-secondary-container text-primary px-1.5 py-0.5 rounded font-mono-sm text-[12px]">[Security]</span> added to system settings
+                        </p>
+<div class="flex gap-2">
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">Config</span>
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">System</span>
+</div>
+</div>
+</div>
+<!-- Log Entry 4 -->
+<div class="relative pl-10">
+<div class="timeline-node !bg-error"></div>
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-4 shadow-sm hover:border-outline transition-all duration-200">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">automation</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">System Process</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">2h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">
+<span class="font-semibold">Ticket #FC-8821</span> status changed to <span class="text-error font-medium">Closed</span>
+</p>
+<div class="flex gap-2">
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded font-label-sm text-[10px] uppercase tracking-wider">Status Change</span>
+</div>
+</div>
+</div>
+<!-- Log Entry 5 (Older) -->
+<div class="relative pl-10 opacity-60">
+<div class="timeline-node !bg-outline-variant"></div>
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-4 shadow-sm">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-primary-fixed">
+<img alt="Jordan Smith" class="w-full h-full object-cover" data-alt="A portrait of a facility manager in a sleek, modern office. Soft, diffused lighting creates a professional and calm atmosphere. The image is composed with a focus on clean lines, neutral colors, and a high-end corporate feel consistent with facility management software aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAEly-OU_KA3xor-SxSsrXnW67z6MCmcOwndzC0hTC7dxzj5IMgRGI0heCfP4tTmG17TogfTjPqnvYJNak-LOe1AXJO631mZSf5jKwuYhvwVfNpbdCfKT7-sk5qYVkC_JCNgFkoo2RWOPCh6lih58BrB-5coSkd8q5KzTLrrANmTk6dXysN6hS4ReWShvBwV2SelAPLh7wBbs9vbqmyPYfZViGhkYX6AVJARLYSGQRFjzWR-ADjCfqGijptNkOQnO_XYgW7u3ugEI"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Jordan Smith</span>
+</div>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">4h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-2">
+                            Updated billing information for <span class="font-semibold">Vendor: North Star Electrics</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface border-t border-surface-container-highest shadow-[0px_-1px_3px_0px_rgba(0,0,0,0.05)] flex justify-around items-center h-20 pb-safe px-container-padding">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-label-sm text-label-sm">Users</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined mb-1">confirmation_number</span>
+<span class="font-label-sm text-label-sm">Tickets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/50 rounded-lg px-3 py-1 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interactions for the cards
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+                card.style.transition = 'transform 0.1s ease';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

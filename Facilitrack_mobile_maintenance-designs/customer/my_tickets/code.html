@@ -1,0 +1,317 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>FacilityConnect - My Tickets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#000000",
+                    "on-secondary-container": "#54647a",
+                    "secondary-container": "#d0e1fb",
+                    "tertiary-container": "#271901",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary": "#000000",
+                    "secondary": "#505f76",
+                    "primary-fixed": "#dae2fd",
+                    "inverse-surface": "#303032",
+                    "surface-container-high": "#eae7e9",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-background": "#1b1b1d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#98805d",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-bright": "#fcf8fa",
+                    "on-tertiary-fixed": "#271901",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0edef",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "outline-variant": "#c6c6cd",
+                    "primary-container": "#131b2e",
+                    "surface-dim": "#dcd9db",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-fixed": "#fcdeb5",
+                    "surface-tint": "#565e74",
+                    "surface": "#fcf8fa",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "outline": "#76777d",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-primary-container": "#7c839b",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-surface": "#1b1b1d",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf8fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "container-padding": "16px",
+                    "card-gap": "12px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-md": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            color: #1b1b1d;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ticket-card {
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+        .active-tab-indicator {
+            height: 2px;
+            bottom: -1px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen items-center font-body-lg text-body-lg">
+<!-- Top AppBar (FacilityConnect Shared Component) -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-outline-variant dark:border-outline">
+<div class="flex items-center justify-between px-container-padding h-16 w-full max-w-[430px] mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="settings_remote">settings_remote</span>
+<h1 class="text-h1-mobile font-h1 text-primary tracking-tight">FacilityConnect</h1>
+</div>
+<button class="material-symbols-outlined text-secondary hover:bg-surface-container-low p-2 rounded-full transition-colors active:scale-95" data-icon="search">search</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[430px] flex-1 pb-24 px-container-padding">
+<!-- Header & Tabs -->
+<div class="pt-6 pb-4">
+<h2 class="font-h1 text-h1 text-on-background mb-4">My Tickets</h2>
+<!-- Search and Filter -->
+<div class="flex gap-2 mb-6">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[20px]" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none text-body-sm transition-all" placeholder="Search tickets..." type="text">
+</div>
+<button class="p-2 border border-outline-variant rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- Custom Segmented Control (Tabs) -->
+<div class="bg-surface-container p-1 rounded-lg flex w-full">
+<button class="flex-1 py-1.5 text-label-md font-label-md bg-surface-container-lowest rounded-[6px] shadow-sm text-primary transition-all">Active</button>
+<button class="flex-1 py-1.5 text-label-md font-label-md text-secondary hover:text-primary transition-all">Closed</button>
+</div>
+</div>
+<!-- Ticket List -->
+<div class="space-y-card-gap">
+<!-- Ticket Card 1 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-3 active:scale-[0.98] transition-transform duration-100">
+<div class="flex justify-between items-start">
+<span class="font-mono-sm text-mono-sm text-on-secondary-container bg-secondary-container/30 px-2 py-0.5 rounded">#FC-8291</span>
+<span class="inline-flex items-center rounded-full bg-secondary-container px-2.5 py-0.5 text-label-sm font-label-sm text-on-secondary-fixed-variant">
+                        In Progress
+                    </span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-background mb-1">Leaking Bathroom Tap</h3>
+<p class="text-body-sm text-secondary">Reported in Executive Suite 402. Water pressure is fluctuating.</p>
+</div>
+<div class="pt-2 border-t border-outline-variant flex items-center justify-between text-label-sm text-secondary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span>Oct 24, 2023</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<span class="text-[10px] font-bold">JD</span>
+</div>
+<span class="font-medium text-on-surface">John Doe</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 2 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-3 active:scale-[0.98] transition-transform duration-100">
+<div class="flex justify-between items-start">
+<span class="font-mono-sm text-mono-sm text-on-secondary-container bg-secondary-container/30 px-2 py-0.5 rounded">#FC-7104</span>
+<span class="inline-flex items-center rounded-full bg-tertiary-fixed px-2.5 py-0.5 text-label-sm font-label-sm text-on-tertiary-fixed-variant">
+                        Pending Approval
+                    </span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-background mb-1">AC Unit Noise Complaint</h3>
+<p class="text-body-sm text-secondary">Main Hallway unit 3 is making a grinding noise every 20 minutes.</p>
+</div>
+<div class="pt-2 border-t border-outline-variant flex items-center justify-between text-label-sm text-secondary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span>Oct 23, 2023</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<span class="text-[10px] font-bold">SM</span>
+</div>
+<span class="font-medium text-on-surface">Sarah Miller</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 3 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-3 active:scale-[0.98] transition-transform duration-100">
+<div class="flex justify-between items-start">
+<span class="font-mono-sm text-mono-sm text-on-secondary-container bg-secondary-container/30 px-2 py-0.5 rounded">#FC-9012</span>
+<span class="inline-flex items-center rounded-full bg-error-container px-2.5 py-0.5 text-label-sm font-label-sm text-error">
+                        Urgent
+                    </span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-background mb-1">Broken Keypad Access</h3>
+<p class="text-body-sm text-secondary">Main storage room entrance. Keypad is not responding to codes.</p>
+</div>
+<div class="pt-2 border-t border-outline-variant flex items-center justify-between text-label-sm text-secondary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span>Oct 25, 2023</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<span class="text-[10px] font-bold">UK</span>
+</div>
+<span class="font-medium text-on-surface">Unassigned</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 4 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-3 active:scale-[0.98] transition-transform duration-100">
+<div class="flex justify-between items-start">
+<span class="font-mono-sm text-mono-sm text-on-secondary-container bg-secondary-container/30 px-2 py-0.5 rounded">#FC-8111</span>
+<span class="inline-flex items-center rounded-full bg-secondary-container px-2.5 py-0.5 text-label-sm font-label-sm text-on-secondary-fixed-variant">
+                        In Progress
+                    </span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-background mb-1">Light Fixture Flickering</h3>
+<p class="text-body-sm text-secondary">Conference Room B. Third row fixture needs ballast replacement.</p>
+</div>
+<div class="pt-2 border-t border-outline-variant flex items-center justify-between text-label-sm text-secondary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span>Oct 22, 2023</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<span class="text-[10px] font-bold">MK</span>
+</div>
+<span class="font-medium text-on-surface">Mike Knight</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Suppressed as per rules for specialized detail/transaction screens, but standard for dashboards) -->
+<!-- We'll keep it as a 'New Ticket' action for this context -->
+<button class="fixed bottom-24 right-container-padding w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform duration-200 z-40">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<!-- Bottom Navigation Bar (FacilityConnect Shared Component) -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[430px] left-1/2 -translate-x-1/2 bg-surface dark:bg-background border-t border-outline-variant dark:border-outline shadow-sm">
+<div class="flex justify-around items-center pt-2 pb-safe px-4 h-16">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- My Tickets (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-background font-semibold hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-label-sm text-label-sm">My Tickets</span>
+</a>
+<!-- Notifications -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-sm text-label-sm">Notifications</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+        // Simple tab switching interaction
+        const tabs = document.querySelectorAll('.bg-surface-container button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                    t.classList.add('text-secondary');
+                });
+                tab.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                tab.classList.remove('text-secondary');
+            });
+        });
+
+        // Search focus interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchIcon = document.querySelector('.relative .material-symbols-outlined');
+        
+        searchInput.addEventListener('focus', () => {
+            searchIcon.classList.add('text-primary');
+        });
+        
+        searchInput.addEventListener('blur', () => {
+            searchIcon.classList.remove('text-primary');
+        });
+    </script>
+</body></html>

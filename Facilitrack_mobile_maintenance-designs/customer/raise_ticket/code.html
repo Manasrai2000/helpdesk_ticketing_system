@@ -1,0 +1,281 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#000000",
+                    "on-secondary-container": "#54647a",
+                    "secondary-container": "#d0e1fb",
+                    "tertiary-container": "#271901",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary": "#000000",
+                    "secondary": "#505f76",
+                    "primary-fixed": "#dae2fd",
+                    "inverse-surface": "#303032",
+                    "surface-container-high": "#eae7e9",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-background": "#1b1b1d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#98805d",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-bright": "#fcf8fa",
+                    "on-tertiary-fixed": "#271901",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0edef",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "outline-variant": "#c6c6cd",
+                    "primary-container": "#131b2e",
+                    "surface-dim": "#dcd9db",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-fixed": "#fcdeb5",
+                    "surface-tint": "#565e74",
+                    "surface": "#fcf8fa",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "outline": "#76777d",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-primary-container": "#7c839b",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-surface": "#1b1b1d",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf8fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "container-padding": "16px",
+                    "card-gap": "12px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-md": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            color: #1b1b1d;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .form-input-focus:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 1px #000000;
+        }
+        .priority-segmented label input:checked + div {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4e2e4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg">
+<div class="max-w-[430px] mx-auto min-h-screen bg-surface flex flex-col relative pb-20">
+<!-- TopAppBar (Based on Shared Components) -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-outline-variant dark:border-outline flex items-center justify-between px-container-padding h-16 max-w-[430px] mx-auto">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 text-primary tracking-tight">Raise a Ticket</h1>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary" data-icon="settings_remote">settings_remote</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-container-padding py-6 space-y-8 overflow-y-auto custom-scrollbar">
+<!-- Welcome/Help Text -->
+<section class="space-y-1">
+<p class="text-secondary font-body-sm">Submit a new facility request or report an issue. Our maintenance team will review it shortly.</p>
+</section>
+<!-- Raise Ticket Form -->
+<form class="space-y-6" id="ticketForm">
+<!-- Category Section -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+                        Category <span class="text-error">*</span>
+</label>
+<div class="relative group">
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg h-12 px-4 appearance-none font-body-lg form-input-focus transition-all">
+<option disabled="" selected="" value="">Select Category</option>
+<option value="plumbing">Plumbing &amp; HVAC</option>
+<option value="electrical">Electrical</option>
+<option value="security">Security &amp; Access</option>
+<option value="cleaning">Janitorial &amp; Cleaning</option>
+<option value="furniture">Furniture &amp; Layout</option>
+<option value="it">IT &amp; Infrastructure</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-secondary">expand_more</span>
+</div>
+</div>
+<!-- Title Section -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+                        Ticket Title <span class="text-error">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg h-12 px-4 font-body-lg form-input-focus transition-all" placeholder="Brief summary of the issue" type="text">
+</div>
+<!-- Priority Segmented Control -->
+<div class="space-y-3">
+<label class="font-label-md text-label-md text-on-surface">Priority Level</label>
+<div class="priority-segmented flex bg-surface-container-high p-1 rounded-xl h-11">
+<label class="flex-1 relative cursor-pointer">
+<input checked="" class="hidden" name="priority" type="radio" value="low">
+<div class="h-full flex items-center justify-center rounded-lg font-label-md transition-all text-secondary">Low</div>
+</label>
+<label class="flex-1 relative cursor-pointer">
+<input class="hidden" name="priority" type="radio" value="medium">
+<div class="h-full flex items-center justify-center rounded-lg font-label-md transition-all text-secondary">Medium</div>
+</label>
+<label class="flex-1 relative cursor-pointer">
+<input class="hidden" name="priority" type="radio" value="high">
+<div class="h-full flex items-center justify-center rounded-lg font-label-md transition-all text-secondary">High</div>
+</label>
+</div>
+</div>
+<!-- Description Section -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">Description</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-4 font-body-lg form-input-focus transition-all resize-none" placeholder="Describe the problem in detail (location, frequency, impact)..." rows="4"></textarea>
+</div>
+<!-- Photo/Video Upload Dropzone -->
+<div class="space-y-3">
+<label class="font-label-md text-label-md text-on-surface">Evidence (Photos &amp; Video)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center gap-3 bg-surface-container-low/30 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">add_a_photo</span>
+</div>
+<div class="text-center">
+<p class="font-label-md text-primary">Tap to upload files</p>
+<p class="font-body-sm text-secondary">PNG, JPG, or MP4 (Max 25MB)</p>
+</div>
+<input class="hidden" id="fileInput" multiple="" type="file">
+</div>
+<!-- Preview Area (Empty initially) -->
+<div class="grid grid-cols-4 gap-2 mt-2" id="filePreviews">
+<!-- Preview thumbnails would be injected here via JS -->
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-4 pb-8">
+<button class="w-full bg-primary text-on-primary h-14 rounded-xl font-h3 active:scale-[0.98] transition-transform shadow-sm flex items-center justify-center gap-2" type="submit">
+<span>Submit Ticket</span>
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</form>
+</main>
+<!-- Contextual Bottom Navigation (Suppressed for focused task, but kept placeholder structure if needed) -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[430px] left-1/2 -translate-x-1/2 bg-surface border-t border-outline-variant shadow-sm flex justify-around items-center pt-2 pb-6 px-4 hidden">
+<!-- Navigation hidden to prioritize the 'Raise Ticket' focus journey as per UX mandate -->
+</nav>
+</div>
+<script>
+        // Simple Interaction logic for Segmented Control and Dropzone
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropzone = document.querySelector('.border-dashed');
+            const fileInput = document.getElementById('fileInput');
+            const previews = document.getElementById('filePreviews');
+
+            dropzone.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    previews.innerHTML = '';
+                    Array.from(files).slice(0, 4).forEach(file => {
+                        const div = document.createElement('div');
+                        div.className = "w-full aspect-square bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant";
+                        div.innerHTML = `<span class="material-symbols-outlined text-secondary">description</span>`;
+                        previews.appendChild(div);
+                    });
+                }
+            });
+
+            const form = document.getElementById('ticketForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Visual feedback for submission
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success';
+                    btn.classList.replace('bg-primary', 'bg-on-secondary-container');
+                    setTimeout(() => {
+                        alert('Ticket successfully created!');
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.classList.replace('bg-on-secondary-container', 'bg-primary');
+                        form.reset();
+                        previews.innerHTML = '';
+                    }, 1500);
+                }, 1000);
+            });
+        });
+    </script>
+</body></html>

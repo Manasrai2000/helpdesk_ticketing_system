@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FacilityFlow | Ticket Monitoring</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#98805d",
+                        "surface": "#fcf8fa",
+                        "surface-container-low": "#f6f3f5",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "tertiary": "#000000",
+                        "on-surface-variant": "#45464d",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#271901",
+                        "surface-dim": "#dcd9db",
+                        "on-secondary-container": "#54647a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#565e74",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface-container-high": "#eae7e9",
+                        "secondary": "#505f76",
+                        "inverse-surface": "#303032",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#fcdeb5",
+                        "tertiary-container": "#271901",
+                        "primary": "#000000",
+                        "outline-variant": "#c6c6cd",
+                        "surface-bright": "#fcf8fa",
+                        "secondary-container": "#d0e1fb",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-container": "#7c839b",
+                        "inverse-primary": "#bec6e0",
+                        "outline": "#76777d",
+                        "on-background": "#1b1b1d",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-fixed": "#d3e4fe",
+                        "background": "#fcf8fa",
+                        "surface-variant": "#e4e2e4",
+                        "surface-container": "#f0edef",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-surface": "#1b1b1d",
+                        "inverse-on-surface": "#f3f0f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "card-gap": "12px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "container-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h2": ["Inter"],
+                        "h3": ["Inter"],
+                        "mono-sm": ["Geist Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            font-family: 'Inter', sans-serif;
+            color: #1b1b1d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ticket-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+        .ticket-card:active {
+            transform: scale(0.98);
+            box-shadow: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4e2e4;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface border-b border-surface-container-highest shadow-sm flex items-center justify-between px-container-padding h-16">
+<div class="flex items-center gap-md">
+<img alt="Admin Profile Photo" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A professional headshot of a facility administrator in a clean modern office setting. The lighting is bright and professional with a neutral background, embodying a minimalist and high-performance enterprise aesthetic consistent with a slate and steel color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTMgRuJkzYB0Ym2d9KrnoeegbylsK1FP1RQ3CiB5Bq1PJjFs2x-bTBZXzmbATH54VIbfXZw0fpL4Gw5RpoDP03Sek5aQmjFqDFf1fGDmMrImaZyNGNUEWhQcbN3xb_8csH33uIf0Bn5a-UOLGVJSO_GuA-psrNTzmhb1gpwft9ceMg9R5CJVVF33iDtUwVwqSJTc6LRhrabZ5rkWVD_7zOgysjed_vvNmtUlwgzG5BgEovKqRsB3tKQiV3Sbpqu7ec5CLz_qZm_Ws"/>
+<h1 class="font-h1 text-h1 text-on-surface">FacilityFlow</h1>
+</div>
+<button class="transition-all duration-200 active:scale-95 text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="flex-1 w-full max-w-[430px] mx-auto pb-32">
+<!-- Search & Quick Stats -->
+<section class="px-container-padding py-md space-y-md">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search Ticket ID or Keyword..." type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="p-md bg-surface-container-lowest border border-outline-variant rounded-xl">
+<p class="font-label-sm text-on-surface-variant">Active Tickets</p>
+<p class="font-h1 text-h1">24</p>
+</div>
+<div class="p-md bg-surface-container-lowest border border-outline-variant rounded-xl">
+<p class="font-label-sm text-on-surface-variant">Urgent</p>
+<p class="font-h1 text-h1 text-error">03</p>
+</div>
+</div>
+</section>
+<!-- Filters Scrollable Row -->
+<section class="px-container-padding pb-md overflow-x-auto custom-scrollbar flex gap-sm no-scrollbar">
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md transition-all active:scale-95">All Status</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-md hover:bg-surface-container-highest transition-all">New</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-md">In Progress</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-md">Verification</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-md">Closed</button>
+</section>
+<section class="px-container-padding pb-md flex gap-sm">
+<div class="flex-1 relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 font-label-md text-on-surface pr-8">
+<option>All Depts</option>
+<option>HVAC</option>
+<option>Electrical</option>
+<option>Plumbing</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+<div class="flex-1 relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 font-label-md text-on-surface pr-8">
+<option>All Priority</option>
+<option>Critical</option>
+<option>High</option>
+<option>Medium</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</section>
+<!-- Ticket List -->
+<section class="px-container-padding space-y-card-gap">
+<!-- Ticket Card 1 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-mono-sm text-outline">#FC-9012</span>
+<h3 class="font-h3 text-on-surface mt-1">AC Compressor Issue</h3>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm">In Progress</span>
+</div>
+<div class="flex items-center gap-md py-sm border-y border-surface-container-highest">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="font-body-sm text-on-surface-variant">Room 402</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="font-body-sm text-on-surface-variant">Alex Rivera</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-xs">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-error">High Priority</span>
+</div>
+<span class="font-label-sm text-outline">Updated 2m ago</span>
+</div>
+</div>
+<!-- Ticket Card 2 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-mono-sm text-outline">#FC-8995</span>
+<h3 class="font-h3 text-on-surface mt-1">Elevator B Inspection</h3>
+</div>
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm">New</span>
+</div>
+<div class="flex items-center gap-md py-sm border-y border-surface-container-highest">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="font-body-sm text-on-surface-variant">East Lobby</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="font-body-sm text-on-surface-variant">Unassigned</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-xs">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-on-secondary-container"></span>
+<span class="font-label-sm text-on-secondary-container">Normal</span>
+</div>
+<span class="font-label-sm text-outline">Updated 15m ago</span>
+</div>
+</div>
+<!-- Ticket Card 3 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-mono-sm text-outline">#FC-8977</span>
+<h3 class="font-h3 text-on-surface mt-1">Water Leakage Report</h3>
+</div>
+<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm">Verification</span>
+</div>
+<div class="flex items-center gap-md py-sm border-y border-surface-container-highest">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="font-body-sm text-on-surface-variant">Cafeteria</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="font-body-sm text-on-surface-variant">Jordan Smith</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-xs">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-sm text-error">Critical</span>
+</div>
+<span class="font-label-sm text-outline">Updated 45m ago</span>
+</div>
+</div>
+<!-- Ticket Card 4 -->
+<div class="ticket-card bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-mono-sm text-outline">#FC-8960</span>
+<h3 class="font-h3 text-on-surface mt-1">Light Fixture Swap</h3>
+</div>
+<span class="px-3 py-1 rounded-full bg-surface-container-low text-outline font-label-sm">Closed</span>
+</div>
+<div class="flex items-center gap-md py-sm border-y border-surface-container-highest">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span class="font-body-sm text-on-surface-variant">Conf. Hall C</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="font-body-sm text-on-surface-variant">Sarah Chen</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-xs">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-outline-variant">Low</span>
+</div>
+<span class="font-label-sm text-outline">Updated 2h ago</span>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB for New Ticket -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center transition-transform active:scale-90 z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface border-t border-surface-container-highest shadow-[0px_-1px_3px_0px_rgba(0,0,0,0.05)] flex justify-around items-center h-20 pb-safe px-container-padding">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm mt-1">Users</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/50 rounded-lg px-3 py-1 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-label-sm text-label-sm mt-1">Tickets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-sm text-label-sm mt-1">More</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Update 'Updated Xm ago' randomly to simulate real-time
+        setInterval(() => {
+            const labels = document.querySelectorAll('.font-label-sm.text-outline');
+            labels.forEach(label => {
+                if(label.innerText.includes('ago')) {
+                    const random = Math.floor(Math.random() * 60);
+                    if (label.innerText.includes('m ago')) {
+                         // Small chance to update just for visual flair
+                        if(Math.random() > 0.8) {
+                             label.innerText = `Updated ${random}m ago`;
+                        }
+                    }
+                }
+            });
+        }, 5000);
+    </script>
+</body></html>

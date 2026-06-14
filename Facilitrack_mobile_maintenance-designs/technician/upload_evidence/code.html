@@ -1,0 +1,255 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "secondary": "#505f76",
+                    "secondary-fixed": "#d3e4fe",
+                    "surface-variant": "#e4e2e4",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dcd9db",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "on-error": "#ffffff",
+                    "surface-container": "#f0edef",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "secondary-container": "#d0e1fb",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary-container": "#271901",
+                    "surface-container-highest": "#e4e2e4",
+                    "surface": "#fcf8fa",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "background": "#fcf8fa",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#76777d",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "on-surface": "#1b1b1d",
+                    "on-primary-container": "#7c839b",
+                    "inverse-surface": "#303032",
+                    "surface-tint": "#565e74",
+                    "on-tertiary-container": "#98805d",
+                    "on-surface-variant": "#45464d",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-tertiary-fixed": "#271901",
+                    "outline-variant": "#c6c6cd",
+                    "tertiary": "#000000",
+                    "on-secondary-fixed": "#0b1c30",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-secondary-container": "#54647a",
+                    "surface-container-high": "#eae7e9",
+                    "surface-container-low": "#f6f3f5",
+                    "primary": "#000000",
+                    "on-background": "#1b1b1d",
+                    "surface-bright": "#fcf8fa",
+                    "primary-fixed": "#dae2fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "container-padding": "16px",
+                    "card-gap": "12px",
+                    "base": "4px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "mono-sm": ["Geist Mono"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"]
+            },
+            "fontSize": {
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf8fa;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .camera-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.4) 100%);
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline docked full-width top-0 flex justify-between items-center px-container-padding h-16 w-full max-w-[430px] z-50">
+<div class="flex items-center gap-3">
+<button class="p-2 transition-colors hover:bg-surface-container-high rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 font-bold text-primary dark:text-on-surface">Evidence Upload</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Technician Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGDOpQ1xDkklcxpA97qWvtNK6whz468gv3XAJKpMY17TDp3gaKW_V3Z8Wb4JyqKSM60xNGLe5vjHTxJn7hMg6VLrmU8l-MUZb03QjcU3fu1RoeFQb0B55-ICgwnIU-r4t3M-mww3Jy65HBTC5-kd7-0OfHDlbJX2aqHKrKfCeKA8Y1trKkdD2Tk5RWaXM5r7aoPgc6NCe6qu-nvJFtGqvfxGHGcS7kENLrCbfD405SKA4NZErxb6ECbwrPe2dU03-pEX7-MX_rPJI">
+</div>
+</header>
+<main class="w-full max-w-[430px] flex-grow flex flex-col p-container-padding gap-lg overflow-y-auto pb-32">
+<!-- Instruction Text -->
+<div class="bg-secondary-container/30 border border-secondary-container p-md rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="font-body-sm text-body-sm text-on-secondary-container">
+                Ensure the work area is clearly visible. Capture the serial number and the final installation state for verification.
+            </p>
+</div>
+<!-- Viewfinder / Upload Area -->
+<div class="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-surface-container-highest border border-outline-variant shadow-sm group">
+<!-- Simulated Viewfinder Content -->
+<img class="w-full h-full object-cover" data-alt="A professional technician's point of view of a high-tech electrical panel inside a brightly lit industrial facility. The lighting is clean and clinical, typical of a modern laboratory or data center. The panel features neatly organized wiring and digital diagnostic displays. The shot is framed as a viewfinder with subtle grid lines, conveying a sense of precision, technical expertise, and systematic order within a facility management context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcfwd3lY4zyiE18wsLRIny4akEKEa3PrZsIgeVmcWa1hK_EJIJdrCtiCojq6-AjEfQxTfWLdSO2GcQZNGxWuMMTbMquIyXU6l9vQw5KKNOXWYOXErzUc90nToJkNZNI_ViChhkiAM-QnsmUcW2bOzpsz5kmLJ3YvuxwdX3Rpij-m7aLS8DJUL6KfqSPSB2Gszgd6oAE2LOPwmPaHDmhs7cdap0Y20XWtJOAomfwNWcEaXl25Pbmo-jc0SiR8zYcdrOBqe3ggih11M">
+<div class="absolute inset-0 camera-overlay flex flex-col justify-between p-md pointer-events-none">
+<div class="flex justify-between items-start">
+<div class="px-2 py-1 bg-black/40 backdrop-blur-md rounded text-[10px] text-white font-mono-sm uppercase tracking-widest">Rec 00:00:12</div>
+<span class="material-symbols-outlined text-white drop-shadow-md">grid_on</span>
+</div>
+<div class="flex justify-center">
+<div class="w-12 h-12 border-2 border-white/50 rounded-lg flex items-center justify-center">
+<div class="w-1 h-1 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex justify-center gap-4">
+<!-- Zoom controls or similar UI could go here if needed -->
+</div>
+</div>
+<!-- Focus Corners -->
+<div class="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-white/80 rounded-tl-sm"></div>
+<div class="absolute top-8 right-8 w-8 h-8 border-t-2 border-r-2 border-white/80 rounded-tr-sm"></div>
+<div class="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-white/80 rounded-bl-sm"></div>
+<div class="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-white/80 rounded-br-sm"></div>
+</div>
+<!-- Primary Actions -->
+<div class="grid grid-cols-2 gap-card-gap">
+<button class="flex flex-col items-center justify-center gap-sm p-lg bg-primary text-on-primary rounded-xl shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[32px]">photo_camera</span>
+<span class="font-label-md text-label-md">Take Photo</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-sm p-lg bg-surface border border-outline-variant text-on-surface rounded-xl shadow-sm hover:bg-surface-container-low active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[32px]">videocam</span>
+<span class="font-label-md text-label-md">Record Video</span>
+</button>
+</div>
+<button class="w-full flex items-center justify-center gap-md p-md bg-surface border border-outline-variant text-on-surface rounded-xl hover:bg-surface-container-low active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">collections</span>
+<span class="font-label-md text-label-md">Choose from Gallery</span>
+</button>
+<!-- Selected Media Thumbnails -->
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-h3 text-h3 text-on-surface">Attached Evidence (3)</h3>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Max 10MB each</span>
+</div>
+<div class="flex gap-md overflow-x-auto pb-2 -mx-2 px-2 scrollbar-hide">
+<!-- Thumbnail 1 -->
+<div class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover" data-alt="A close-up high-resolution photograph of industrial machinery parts, showing clean steel surfaces and precise mechanical connections. The lighting is bright and professional, highlighting the texture of the metal and the cleanliness of the maintenance work. The aesthetic is modern and industrial, aligning with high-end facility operations standards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg3jO5iEOcrCkpE4IsKU63hGpT7n_DEJyuO-YFk3xTzMntBVezBVhA4uNkEWKxQoWDnJepPd6DGoZDdViTUDJ-HBvlw90He7KxNeSmcbcSWBbxNbRTETCS6Uy0Mo8o0h9ba2olishyDFARcS0HkJvrQtgWv8NR3OSlgM01K7CanhZSgLfbz-XUtG_XyHyarSZqrDD_aZ_ICLREajQ4MPE21Md2JNZZ0FQwrwxvYOLQIawI61ndtWrUvNJ0-WssBL3eaBngehHQ0LY">
+<button class="absolute top-1 right-1 w-6 h-6 bg-error text-on-error rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Thumbnail 2 -->
+<div class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a complex circuit board with glowing indicator lights and neatly arranged components. The lighting is crisp and detailed, showcasing the intricate technology found within modern facility control systems. The color palette consists of cool grays and silvers with vibrant tech-blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApdcncMbUEhruT5r7KofrbFgWZ6zhXlsh2bTN-QgbviQs4Vb-Z6toPAOgtrh-dZf4wWGTrp99C2LQ7A9ILunoVEWGfHutv7Gsu3ZbS5aHcvku65CizXDW1Q1ydfQE6XeYITIcqlrgxqzwzkgjjquR9Vj8mdnAzFc0gibAmxumPjt_U4DqGMXy4nfC5q6QKt2h_AtSq7AIpd7NZ-gyY5Woh0LCikcdt5_HOUqd_eA9cdAND4mKJdeErgpRBOqaOsKjCjj2PPkJ_3Ag">
+<button class="absolute top-1 right-1 w-6 h-6 bg-error text-on-error rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Thumbnail 3 -->
+<div class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-outline-variant group">
+<div class="w-full h-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px]">play_circle</span>
+</div>
+<div class="absolute bottom-1 right-1 px-1 bg-black/60 rounded text-[9px] text-white font-mono-sm">0:12</div>
+<button class="absolute top-1 right-1 w-6 h-6 bg-error text-on-error rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-4 bg-primary text-on-primary font-h3 text-h3 rounded-xl shadow-xl active:scale-95 transition-all mt-4">
+            Upload &amp; Complete Task
+        </button>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm max-w-[430px] left-1/2 -translate-x-1/2 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-primary-fixed bg-secondary-container/50 dark:bg-secondary-container rounded-lg px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="font-label-sm text-label-sm">Tasks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for capture buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.style.transform = 'scale(0.8)';
+                    setTimeout(() => icon.style.transform = 'scale(1)', 100);
+                }
+            });
+        });
+
+        // Simple thumbnail removal simulation
+        document.querySelectorAll('.bg-error').forEach(delBtn => {
+            delBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const thumb = this.closest('.relative');
+                thumb.style.opacity = '0';
+                thumb.style.transform = 'scale(0.8)';
+                setTimeout(() => thumb.remove(), 200);
+            });
+        });
+    </script>
+</body></html>

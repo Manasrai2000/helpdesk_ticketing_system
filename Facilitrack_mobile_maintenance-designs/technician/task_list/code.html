@@ -1,0 +1,288 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono:wght@400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .task-card:active {
+            transform: scale(0.98);
+        }
+        body {
+            background-color: #fcf8fa;
+            overscroll-behavior-y: contain;
+        }
+        /* Custom scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e4e2e4;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "secondary": "#505f76",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-variant": "#e4e2e4",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dcd9db",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0f2",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0edef",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary-container": "#d0e1fb",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-container": "#271901",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface": "#fcf8fa",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "background": "#fcf8fa",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "inverse-primary": "#bec6e0",
+                        "on-surface": "#1b1b1d",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#303032",
+                        "surface-tint": "#565e74",
+                        "on-tertiary-container": "#98805d",
+                        "on-surface-variant": "#45464d",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary-fixed": "#271901",
+                        "outline-variant": "#c6c6cd",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "surface-container-high": "#eae7e9",
+                        "surface-container-low": "#f6f3f5",
+                        "primary": "#000000",
+                        "on-background": "#1b1b1d",
+                        "surface-bright": "#fcf8fa",
+                        "primary-fixed": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "container-padding": "16px",
+                        "card-gap": "12px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "mono-sm": ["Geist Mono"],
+                        "body-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-sm text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-container-padding h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-h2 text-h2 font-bold text-primary dark:text-on-surface">FacilityOps</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Technician Profile" class="w-full h-full object-cover" data-alt="Close-up professional portrait of a skilled maintenance technician with a friendly expression, wearing a clean charcoal grey work uniform. The background is a brightly lit, modern industrial facility with clean lines and soft daylight. High-end professional photography style, sharp focus, neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8XEKrQ2SwE9n4M9gIGXmidHMFvHF4qU0y9dQRXZSjaPoFs-Hey5yEG74FY21cYIqnLpeBdYXBRsmd6lUZb89Q-ajH1yDYyP5Gv3mQSTsLLzk3c6m1Dku0AISUBpYrUzKs9P6QjMdwJmEv_DJV8eMhym2iRlJ3S-YWJlLrGTcWz0Fr9emCBhDcpiYfXNXMqVD5u2ABOW-hKk1et4OtFZNQgHpU9tiLXyVy7aAl1T14p_EkxaAF2FOo7ZKbxqw_4IENX2W0_jjd8Ws">
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto pb-24">
+<!-- Search & Title Section -->
+<div class="px-container-padding pt-6 pb-4">
+<h2 class="font-h1 text-h1 text-on-surface mb-4">My Tasks</h2>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-body-sm" placeholder="Search task ID or location..." type="text">
+</div>
+</div>
+<!-- Segmented Filter Control -->
+<div class="px-container-padding mb-6">
+<div class="bg-surface-container flex p-1 rounded-xl relative overflow-hidden">
+<button class="relative z-10 flex-1 py-2 text-label-md font-semibold text-primary transition-colors" onclick="setActiveTab(this, 0)">
+                    Assigned
+                </button>
+<button class="relative z-10 flex-1 py-2 text-label-md font-medium text-on-surface-variant transition-colors" onclick="setActiveTab(this, 1)">
+                    In Progress
+                </button>
+<button class="relative z-10 flex-1 py-2 text-label-md font-medium text-on-surface-variant transition-colors" onclick="setActiveTab(this, 2)">
+                    Completed
+                </button>
+<!-- Selection Highlight -->
+<div class="absolute top-1 bottom-1 left-1 w-[32.5%] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out" id="tab-highlight"></div>
+</div>
+</div>
+<!-- Task List Content -->
+<div class="px-container-padding flex flex-col gap-card-gap">
+<!-- High Priority Task -->
+<div class="task-card bg-white border border-outline-variant rounded-xl p-4 shadow-sm transition-transform active:scale-98">
+<div class="flex justify-between items-start mb-3">
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">#FC-8291</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-error-container text-on-error-container">High</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1">Clogged Main Drain</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Building B, Room 402 • John Smith</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">plumbing</span>
+<span class="text-label-sm font-medium text-on-surface-variant">Plumbing</span>
+</div>
+<div class="flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="text-label-sm font-semibold">Due in 45m</span>
+</div>
+</div>
+</div>
+<!-- Medium Priority Task -->
+<div class="task-card bg-white border border-outline-variant rounded-xl p-4 shadow-sm transition-transform active:scale-98">
+<div class="flex justify-between items-start mb-3">
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">#FC-8304</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-secondary-container text-on-secondary-container">Medium</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1">HVAC Maintenance</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Lobby East Wing • Facilities Manager</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">hvac</span>
+<span class="text-label-sm font-medium text-on-surface-variant">HVAC</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="text-label-sm">Due Today</span>
+</div>
+</div>
+</div>
+<!-- In Progress Sample -->
+<div class="task-card bg-white border border-primary/20 rounded-xl p-4 shadow-sm transition-transform active:scale-98 relative overflow-hidden">
+<!-- Status indicator line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-3 pl-2">
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">#FC-7992</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-surface-container-highest text-on-surface">Low</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1 pl-2">Replace LED Ballasts</h3>
+<p class="text-body-sm text-on-surface-variant mb-4 pl-2">Floor 12, Suite 1205 • Sarah Connor</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-3 pl-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">electrical_services</span>
+<span class="text-label-sm font-medium text-on-surface-variant">Electrical</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">autorenew</span>
+<span class="text-label-sm font-bold">1h 12m active</span>
+</div>
+</div>
+</div>
+<!-- High Priority Task 2 -->
+<div class="task-card bg-white border border-outline-variant rounded-xl p-4 shadow-sm transition-transform active:scale-98">
+<div class="flex justify-between items-start mb-3">
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">#FC-8441</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-error-container text-on-error-container">High</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-1">Server Room Leak</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Building A, IT Hub • Mark Davis</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">emergency_home</span>
+<span class="text-label-sm font-medium text-on-surface-variant">Emergency</span>
+</div>
+<div class="flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span class="text-label-sm font-bold">Immediate</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low transition-all px-3 py-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-primary-fixed bg-secondary-container/50 dark:bg-secondary-container rounded-lg px-3 py-1 scale-98 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="font-label-sm text-label-sm mt-1 font-semibold">Tasks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low transition-all px-3 py-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<!-- Contextual FAB for high-level Task Screen -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 duration-150 transition-all z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<script>
+        function setActiveTab(element, index) {
+            const highlight = document.getElementById('tab-highlight');
+            const buttons = element.parentElement.querySelectorAll('button');
+            
+            // Move highlight
+            highlight.style.transform = `translateX(${index * 100}%)`;
+            
+            // Update styles
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('text-primary', 'font-semibold');
+                    btn.classList.remove('text-on-surface-variant', 'font-medium');
+                } else {
+                    btn.classList.remove('text-primary', 'font-semibold');
+                    btn.classList.add('text-on-surface-variant', 'font-medium');
+                }
+            });
+        }
+    </script>
+</body></html>

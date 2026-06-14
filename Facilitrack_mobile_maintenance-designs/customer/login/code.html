@@ -1,0 +1,244 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FacilityConnect - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#000000",
+                    "on-secondary-container": "#54647a",
+                    "secondary-container": "#d0e1fb",
+                    "tertiary-container": "#271901",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary": "#000000",
+                    "secondary": "#505f76",
+                    "primary-fixed": "#dae2fd",
+                    "inverse-surface": "#303032",
+                    "surface-container-high": "#eae7e9",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-background": "#1b1b1d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#98805d",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-bright": "#fcf8fa",
+                    "on-tertiary-fixed": "#271901",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0edef",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "outline-variant": "#c6c6cd",
+                    "primary-container": "#131b2e",
+                    "surface-dim": "#dcd9db",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-fixed": "#fcdeb5",
+                    "surface-tint": "#565e74",
+                    "surface": "#fcf8fa",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "outline": "#76777d",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-primary-container": "#7c839b",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-surface": "#1b1b1d",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf8fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "container-padding": "16px",
+                    "card-gap": "12px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-md": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8fafc; /* Slate-50 fallback */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .input-focus-ring:focus-within {
+            box-shadow: 0 0 0 2px #000000;
+        }
+        /* Custom elevation for shadcn-style cards */
+        .premium-shadow {
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-body-lg text-on-background min-h-screen flex flex-col items-center justify-center p-container-padding">
+<!-- Login Container -->
+<main class="w-full max-w-[430px] flex flex-col gap-xl">
+<!-- Header / Logo Section -->
+<header class="flex flex-col items-center text-center gap-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="settings_remote">settings_remote</span>
+<h1 class="font-h1 text-h1 text-primary tracking-tight">FacilityConnect</h1>
+</div>
+<div class="flex flex-col gap-xs mt-md">
+<h2 class="font-h2 text-h2 text-on-background">Welcome back</h2>
+<p class="font-body-sm text-body-sm text-secondary">Enter your credentials to access your dashboard</p>
+</div>
+</header>
+<!-- Login Form Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg premium-shadow flex flex-col gap-lg">
+<form action="#" class="flex flex-col gap-md" id="loginForm" method="POST">
+<!-- Email Input Group -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="email">Email address</label>
+<div class="relative group">
+<input class="w-full px-md py-sm rounded-lg border border-outline-variant bg-surface-bright text-on-surface placeholder:text-outline font-body-sm transition-all focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" id="email" name="email" placeholder="m@example.com" required="" type="email">
+</div>
+</div>
+<!-- Password Input Group -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="#">Forgot password?</a>
+</div>
+<div class="relative group">
+<input class="w-full px-md py-sm rounded-lg border border-outline-variant bg-surface-bright text-on-surface placeholder:text-outline font-body-sm transition-all focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" id="password" name="password" placeholder="••••••••" required="" type="password">
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors" id="togglePassword" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md text-label-md hover:opacity-90 active:scale-[0.98] transition-all duration-200 mt-sm flex items-center justify-center gap-xs" type="submit">
+                    Login
+                </button>
+</form>
+<!-- Divider -->
+<div class="flex items-center gap-md">
+<div class="h-[1px] w-full bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-outline shrink-0">OR CONTINUE WITH</span>
+<div class="h-[1px] w-full bg-outline-variant"></div>
+</div>
+<!-- Social/SSO Options -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95 duration-100">
+<img alt="Google" class="w-4 h-4 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-nYN5a0fNa3uUbOls9hR9z8KPLg5VDAal-rlaiaXZOze6uCCgDbRiRwlK9Ah-UJ0R8rI6hwNptitdt68NvpIQi-Ui2kSry6wnyjdteNNUcTvDitkHY_Y7J_ye8OLydkE5YY5Uw3j0qKcnjdG_K6uhousKGUZU08w9nioh2ukI0SCANgTfU5pnQwA5QP9XxqyRiL3bZAHjDjmgFzl6A15GRi0HIFwMz_eggJGya3euDbgJnKsoaWEEY2zFgkLh97op24bLLodXsnE">
+                    Google
+                </button>
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="terminal">terminal</span>
+                    SSO
+                </button>
+</div>
+</section>
+<!-- Footer Link -->
+<footer class="text-center">
+<p class="font-body-sm text-body-sm text-secondary">
+                Don't have an account? 
+                <a class="text-primary font-semibold hover:underline" href="#">Sign up</a>
+</p>
+</footer>
+</main>
+<!-- Visual Decor (Subtle Atmosphere) -->
+<div class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20"></div>
+<div class="fixed -bottom-24 -left-24 w-64 h-64 bg-secondary-container rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+<div class="fixed -top-24 -right-24 w-64 h-64 bg-primary-fixed rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+<script>
+        // Micro-interactions for the login form
+        const loginForm = document.getElementById('loginForm');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            togglePassword.querySelector('span').textContent = isPassword ? 'visibility_off' : 'visibility';
+        });
+
+        // Simple form handling simulation
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <span class="material-symbols-outlined animate-spin text-[20px]" data-icon="progress_activity">progress_activity</span>
+                Logging in...
+            `;
+
+            // Simulate API call
+            setTimeout(() => {
+                submitBtn.innerHTML = `
+                    <span class="material-symbols-outlined text-[20px]" data-icon="check_circle">check_circle</span>
+                    Success
+                `;
+                submitBtn.classList.replace('bg-primary', 'bg-emerald-600');
+                
+                setTimeout(() => {
+                    alert('Login successful! Redirecting to facility dashboard...');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.classList.replace('bg-emerald-600', 'bg-primary');
+                }, 1000);
+            }, 1500);
+        });
+
+        // Add floating effect to card on mouse move (Desktop only)
+        if (window.innerWidth > 1024) {
+            const card = document.querySelector('section');
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 100;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 100;
+                card.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FacilityFlow Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-tertiary-container": "#98805d",
+                "surface": "#fcf8fa",
+                "surface-container-low": "#f6f3f5",
+                "on-tertiary-fixed-variant": "#574425",
+                "on-primary-fixed-variant": "#3f465c",
+                "tertiary": "#000000",
+                "on-surface-variant": "#45464d",
+                "on-secondary-fixed-variant": "#38485d",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed": "#271901",
+                "surface-dim": "#dcd9db",
+                "on-secondary-container": "#54647a",
+                "on-primary": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "surface-tint": "#565e74",
+                "surface-container-highest": "#e4e2e4",
+                "surface-container-high": "#eae7e9",
+                "secondary": "#505f76",
+                "inverse-surface": "#303032",
+                "primary-fixed-dim": "#bec6e0",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#fcdeb5",
+                "tertiary-container": "#271901",
+                "primary": "#000000",
+                "outline-variant": "#c6c6cd",
+                "surface-bright": "#fcf8fa",
+                "secondary-container": "#d0e1fb",
+                "on-primary-fixed": "#131b2e",
+                "on-error": "#ffffff",
+                "secondary-fixed-dim": "#b7c8e1",
+                "on-primary-container": "#7c839b",
+                "inverse-primary": "#bec6e0",
+                "outline": "#76777d",
+                "on-background": "#1b1b1d",
+                "error-container": "#ffdad6",
+                "surface-container-lowest": "#ffffff",
+                "primary-container": "#131b2e",
+                "on-secondary": "#ffffff",
+                "primary-fixed": "#dae2fd",
+                "secondary-fixed": "#d3e4fe",
+                "background": "#fcf8fa",
+                "surface-variant": "#e4e2e4",
+                "surface-container": "#f0edef",
+                "on-secondary-fixed": "#0b1c30",
+                "tertiary-fixed-dim": "#dec29a",
+                "on-surface": "#1b1b1d",
+                "inverse-on-surface": "#f3f0f2"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "base": "4px",
+                "card-gap": "12px",
+                "sm": "8px",
+                "lg": "24px",
+                "md": "16px",
+                "xs": "4px",
+                "xl": "32px",
+                "container-padding": "16px"
+            },
+            "fontFamily": {
+                "h1": ["Inter"],
+                "label-sm": ["Inter"],
+                "body-sm": ["Inter"],
+                "label-md": ["Inter"],
+                "h2": ["Inter"],
+                "h3": ["Inter"],
+                "mono-sm": ["Geist Mono"],
+                "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+        .chart-container {
+            position: relative;
+            background: #ffffff;
+            border: 1px solid #e4e2e4;
+            border-radius: 0.75rem;
+            padding: 16px;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface pb-24">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-surface-container-highest dark:border-outline-variant shadow-sm transition-all duration-200">
+<div class="flex items-center justify-between px-container-padding h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Admin Profile Photo" class="w-full h-full object-cover" data-alt="A professional headshot of a facility operations director in a high-tech control center environment. The person is wearing a sleek, charcoal gray business-casual outfit. The background is softly blurred, showing glowing blue and white server racks and modern data visualization screens. The lighting is crisp and modern, emphasizing a sense of professional authority and calm efficiency within a slate and steel color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmQo8ExruT7jZvCYAnVuFyk34ZGi3ONybFlrIvVQlk1gXzose9TCHkGxv-zxnErVtNnxcTa0NJezAxuINS-CmxkiYZdokaMmIQrVsiRBMtfstPoJ0xVgRsZweIkfvNbK86L0zM6Pj4wiwZ0rO02YmqBIw0RxAQd5WUqN70-r8J835Jn8i5-9-APRVKUdtP32_HywXWB5nASYpq-q4NARPxIQPfw4CaJmP67K4wSEc_goZfpdkKJoOWY2J7azGk2S1RPoggoj1OGB8"/>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface dark:text-on-surface">FacilityFlow</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-on-surface transition-all duration-200 active:scale-95 p-2 rounded-full hover:bg-surface-container-low" data-icon="notifications">notifications</button>
+</div>
+</div>
+</header>
+<main class="max-w-screen-xl mx-auto px-container-padding pt-6 space-y-8">
+<!-- Upper Section: Key Metrics -->
+<section>
+<h2 class="font-h2 text-h2 mb-4">Operations Overview</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-card-gap">
+<!-- Total Customers -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl shadow-sm transition-transform active:scale-95">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[18px]">person</span>
+<span class="font-label-sm text-label-sm">Customers</span>
+</div>
+<div class="font-h1 text-h1">1,240</div>
+<div class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> +12%
+                    </div>
+</div>
+<!-- Total Technicians -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl shadow-sm transition-transform active:scale-95">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[18px]">engineering</span>
+<span class="font-label-sm text-label-sm">Technicians</span>
+</div>
+<div class="font-h1 text-h1">45</div>
+<div class="text-[10px] text-on-surface-variant font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> 8 Active
+                    </div>
+</div>
+<!-- Total Dispatchers -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl shadow-sm transition-transform active:scale-95">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span class="font-label-sm text-label-sm">Dispatchers</span>
+</div>
+<div class="font-h1 text-h1">12</div>
+<div class="text-[10px] text-on-surface-variant font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span> 24/7 Coverage
+                    </div>
+</div>
+<!-- Open Tickets -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl shadow-sm transition-transform active:scale-95">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[18px] text-error">confirmation_number</span>
+<span class="font-label-sm text-label-sm">Open</span>
+</div>
+<div class="font-h1 text-h1">34</div>
+<div class="text-[10px] text-error font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">priority_high</span> 5 Critical
+                    </div>
+</div>
+<!-- Closed Tickets -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl shadow-sm transition-transform active:scale-95">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[18px] text-emerald-600">task_alt</span>
+<span class="font-label-sm text-label-sm">Closed</span>
+</div>
+<div class="font-h1 text-h1">892</div>
+<div class="text-[10px] text-on-surface-variant font-medium mt-1">This month</div>
+</div>
+<!-- Avg. Resolution -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl shadow-sm transition-transform active:scale-95">
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span class="font-label-sm text-label-sm">Avg. Res.</span>
+</div>
+<div class="font-h1 text-h1">4.2h</div>
+<div class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">arrow_downward</span> -15m
+                    </div>
+</div>
+</div>
+</section>
+<!-- Middle Section: Visual Data -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Tickets by Department -->
+<div class="chart-container">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-h3 text-h3">Tickets by Department</h3>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">more_vert</span>
+</div>
+<div class="space-y-4">
+<!-- HVAC -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-md text-label-md">
+<span>HVAC</span>
+<span>342</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Electrical -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-md text-label-md">
+<span>Electrical</span>
+<span>210</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 55%"></div>
+</div>
+</div>
+<!-- Plumbing -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-md text-label-md">
+<span>Plumbing</span>
+<span>185</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-on-secondary-fixed-variant" style="width: 48%"></div>
+</div>
+</div>
+<!-- Cleaning -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-md text-label-md">
+<span>Cleaning</span>
+<span>155</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant" style="width: 40%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tickets by Priority -->
+<div class="chart-container">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-h3 text-h3">Tickets by Priority</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-container text-xs rounded-full font-medium">Weekly</button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 py-4">
+<!-- Circular Gauge Simulation -->
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-high" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-error" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="200" stroke-linecap="round" stroke-width="12"></circle>
+<circle class="text-primary" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="150" stroke-linecap="round" stroke-width="12" style="transform-origin: 50% 50%; transform: rotate(80deg);"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-h2 text-h2">1,271</span>
+<span class="text-[10px] text-outline uppercase tracking-wider">Total</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="grid grid-cols-2 md:grid-cols-1 gap-3 w-full max-w-[180px]">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="font-label-md text-label-md text-on-surface-variant flex-1">Urgent</span>
+<span class="font-mono-sm text-mono-sm">12%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-label-md text-label-md text-on-surface-variant flex-1">High</span>
+<span class="font-mono-sm text-mono-sm">28%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<span class="font-label-md text-label-md text-on-surface-variant flex-1">Medium</span>
+<span class="font-mono-sm text-mono-sm">45%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<span class="font-label-md text-label-md text-on-surface-variant flex-1">Low</span>
+<span class="font-mono-sm text-mono-sm">15%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Lower Section: Top Technicians -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-h2 text-h2">Top Performance: Technicians</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-3 overflow-x-auto scroll-hide">
+<!-- Tech 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center justify-between shadow-sm min-w-full">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Technician" class="w-full h-full object-cover" data-alt="A close-up portrait of a senior maintenance technician in a professional navy blue uniform. He is smiling confidently, holding a digital tablet that displays technical blueprints. The background is a clean, modern facility hallway with soft overhead lighting. The visual style is crisp and high-definition, reflecting a 'Slate &amp; Steel' palette with a focus on professional reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVA6tBzWVqVFgNHwa6jr4fZmYNeIggq6fX_4JNF7VnI9LaV4wp2bcmkSVgz9Mh2WZjx_JWLQXOCW1T9oJmjBaWwlUuIyFTsoWUY37Q8StL6mm84ckjcxe-7ctxaxYcx-3aYZF65GKpf08FFp6dIEi_QUl0NtnMYUnaWjRqMIV-jMZoPP_4Y-uwly8A1OY-bWflvprKl1yhnFSFQdDCO9o0AWAEmu26XePEsaQgP9ynWVP1ahjUspPLZfMU_nxuSYR33k8YuikGPtA"/>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-on-surface">Marcus Sterling</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lead HVAC Specialist</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right">
+<div class="font-h3 text-h3">142</div>
+<div class="font-label-sm text-label-sm text-outline">Tickets</div>
+</div>
+<div class="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.9</span>
+</div>
+</div>
+</div>
+<!-- Tech 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center justify-between shadow-sm min-w-full">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Technician" class="w-full h-full object-cover" data-alt="A focused portrait of a female master electrician working on a sleek, modern electrical panel. She is wearing professional slate-gray workwear and clear safety glasses. The lighting is focused and warm, creating high-contrast shadows. The aesthetic is industrial yet refined, following the facility management theme with deep blacks and steel-toned highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmeNNsr5MuAVkaxNLnRSGQ6jNZ9Ri9Vg2XEXut4M9XIZt84raXNKfx-AlBLv7nQDCEmCvJE4dRCO0MdHoaIq8uuzyq6IMhki1bXBTRJtUNT1xAdi2tRToeIAUuRaYH2dN0Q0M7_X1qrux-hEPvOXMY22JokV5ffz3F6UCUUnNwn6ENI9dtoq8Y3fQ_eZAm-bzQ25omTLWrdb_IKZbIiMj1mziAx6J83s72WfmEV9dYIQkctgRe38Wri2vIFQzSRW03UQabJ007zHA"/>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-on-surface">Elena Rodriguez</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Master Electrician</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right">
+<div class="font-h3 text-h3">128</div>
+<div class="font-label-sm text-label-sm text-outline">Tickets</div>
+</div>
+<div class="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.8</span>
+</div>
+</div>
+</div>
+<!-- Tech 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center justify-between shadow-sm min-w-full">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Technician" class="w-full h-full object-cover" data-alt="A portrait of a skilled plumbing technician in a high-end commercial kitchen setting. He is kneeling next to modern stainless steel equipment, carrying a professional tool roll. The scene is illuminated by cool, bright studio lighting, emphasizing cleanliness and precision. The overall color scheme uses muted grays, whites, and deep blues to convey a sense of modern professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8ZEN9fKuBbpLl1FWA56weTamK0Te3U5pDa-IMrl-ny6XF3zRkmDrRfvKanIEUW7aZfhKtfAwTSXJ00iYFnzKfgYIkzOMxvxaSD-00nNLERx1TxrvONH00wgCXHfnLtMXX8ziALGTox3d4diE8kvlOG_oZSiGnoX3kuBR7v_2uC1WFUi9pFJdIWUespfPY6dnvu2EfuZlr8zeVy7OFEOKqrZcpw8_cH_GFUOS1GcO1Kx-_TqlluU6pPYwuDqttyeVrftK6Pp5nXqo"/>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-on-surface">David Chen</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Senior Plumbing</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right">
+<div class="font-h3 text-h3">115</div>
+<div class="font-label-sm text-label-sm text-outline">Tickets</div>
+</div>
+<div class="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.7</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-background border-t border-surface-container-highest dark:border-outline-variant shadow-[0px_-1px_3px_0px_rgba(0,0,0,0.05)] md:hidden">
+<div class="flex justify-around items-center h-20 pb-safe px-container-padding">
+<!-- Dashboard Active -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-primary-fixed bg-secondary-container/50 dark:bg-secondary-container rounded-lg px-3 py-1 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<!-- Users -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm">Users</span>
+</a>
+<!-- Tickets -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-label-sm text-label-sm">Tickets</span>
+</a>
+<!-- More -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-3 py-1 transition-transform duration-200 active:scale-90 hover:text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</div>
+</nav>
+<!-- Desktop Floating Navigation (Extra touch for larger screens) -->
+<div class="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col gap-4 bg-surface-container-lowest border border-outline-variant p-3 rounded-2xl shadow-xl z-50">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary text-white shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined">group</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined">confirmation_number</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<script>
+        // Micro-interaction for cards
+        document.querySelectorAll('.chart-container, .bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('shadow-md');
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('shadow-md');
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search bar interaction (if needed)
+        // Simple data refresh simulator
+        setInterval(() => {
+            const metrics = document.querySelectorAll('.font-h1');
+            metrics.forEach(m => {
+                if(Math.random() > 0.8) {
+                    m.classList.add('text-primary');
+                    setTimeout(() => m.classList.remove('text-primary'), 500);
+                }
+            });
+        }, 5000);
+    </script>
+</body></html>

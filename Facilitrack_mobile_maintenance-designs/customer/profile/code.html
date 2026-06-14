@@ -1,0 +1,237 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#000000",
+                    "on-secondary-container": "#54647a",
+                    "secondary-container": "#d0e1fb",
+                    "tertiary-container": "#271901",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary": "#000000",
+                    "secondary": "#505f76",
+                    "primary-fixed": "#dae2fd",
+                    "inverse-surface": "#303032",
+                    "surface-container-high": "#eae7e9",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-background": "#1b1b1d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#98805d",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-bright": "#fcf8fa",
+                    "on-tertiary-fixed": "#271901",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0edef",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f2",
+                    "outline-variant": "#c6c6cd",
+                    "primary-container": "#131b2e",
+                    "surface-dim": "#dcd9db",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-fixed": "#fcdeb5",
+                    "surface-tint": "#565e74",
+                    "surface": "#fcf8fa",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-primary": "#bec6e0",
+                    "outline": "#76777d",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-primary-container": "#7c839b",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-surface": "#1b1b1d",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf8fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "container-padding": "16px",
+                    "card-gap": "12px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-md": ["Inter"],
+                    "mono-sm": ["Geist Mono"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fa;
+            color: #1b1b1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .profile-card-shadow {
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+        .destructive-btn:active {
+            transform: scale(0.98);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen items-center">
+<!-- Top App Bar -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-background border-b border-outline-variant dark:border-outline">
+<div class="flex items-center justify-between px-container-padding h-16 w-full max-w-[430px] mx-auto">
+<h1 class="text-h1 font-h1 text-primary dark:text-on-background tracking-tight">Profile</h1>
+<button class="material-symbols-outlined text-secondary hover:bg-surface-container-low transition-colors p-2 rounded-full">
+                settings
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[430px] px-container-padding pb-32 pt-8 flex flex-col gap-lg">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center text-center gap-md">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-2 border-surface-container-high overflow-hidden profile-card-shadow bg-surface-container">
+<img alt="Alex Johnson" class="w-full h-full object-cover" data-alt="A professional and friendly portrait of a man in his early 30s with short dark hair and a clean-shaven face. He is wearing a minimalist dark charcoal polo shirt, set against a soft, out-of-focus modern office background with neutral gray and white tones. The lighting is soft and natural, creating a clean, high-end enterprise aesthetic consistent with a professional facility management platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtK9wyA-r1hrgpQcVP2EfkePALIz9unL5CtPXAwHt7s7-08PnmnOi5yVJq-RhdkrEyWPmXnvQYpZs46GU489WQIFSNU0X-rBgBSVFAu45ob16E67IiKdXFjB7F-vy9D-On6GPK91nvATk-FstMRc1kkh1QU6aPKZMwy1E2SmFf7qkDCjnM7gKrl8mnNauVxT4nVqMLmhWzZ-fSpsg1emmXHx8wnEiTtnzvvfwhxQq0DNpYWhwdDcaZsdymYwXtIx9UfVpyJjBXsxw">
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center border-2 border-surface profile-card-shadow active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<div class="space-y-1">
+<h2 class="font-h2 text-h2 text-on-background">Alex Johnson</h2>
+<div class="flex items-center justify-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[16px]">apartment</span>
+<p class="font-body-sm text-body-sm">Room 402, Building B</p>
+</div>
+</div>
+</section>
+<!-- Contact Info Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md profile-card-shadow flex flex-col gap-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Email</span>
+<span class="font-body-lg text-body-lg text-on-background">alex.johnson@facility.com</span>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant w-full"></div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Phone</span>
+<span class="font-body-lg text-body-lg text-on-background">+1 (555) 012-3456</span>
+</div>
+</div>
+</div>
+<!-- Menu List -->
+<nav class="flex flex-col gap-sm">
+<button class="flex items-center justify-between w-full p-md bg-surface-container-lowest border border-outline-variant rounded-xl profile-card-shadow hover:bg-surface-container-low transition-colors active:scale-[0.99]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">info</span>
+<span class="font-label-md text-label-md text-on-background">Room Information</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full p-md bg-surface-container-lowest border border-outline-variant rounded-xl profile-card-shadow hover:bg-surface-container-low transition-colors active:scale-[0.99]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">contact_page</span>
+<span class="font-label-md text-label-md text-on-background">Contact Details</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full p-md bg-surface-container-lowest border border-outline-variant rounded-xl profile-card-shadow hover:bg-surface-container-low transition-colors active:scale-[0.99]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">lock</span>
+<span class="font-label-md text-label-md text-on-background">Change Password</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full p-md bg-surface-container-lowest border border-error/20 rounded-xl profile-card-shadow hover:bg-error-container/30 transition-colors active:scale-[0.99] mt-lg">
+<div class="flex items-center gap-md text-error">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</div>
+</button>
+</nav>
+<!-- Version Info -->
+<footer class="text-center mt-md">
+<p class="font-mono-sm text-mono-sm text-outline">v2.4.0-prod-stable</p>
+</footer>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[430px] left-1/2 -translate-x-1/2 bg-surface dark:bg-background border-t border-outline-variant dark:border-outline shadow-sm">
+<div class="flex justify-around items-center pt-2 pb-safe px-4 h-16">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-label-sm text-label-sm">My Tickets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-sm text-label-sm">Notifications</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-background font-semibold hover:opacity-80 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+        // Simple click interaction feedback for all buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('opacity-80');
+                setTimeout(() => this.classList.remove('opacity-80'), 150);
+            });
+        });
+    </script>
+</body></html>

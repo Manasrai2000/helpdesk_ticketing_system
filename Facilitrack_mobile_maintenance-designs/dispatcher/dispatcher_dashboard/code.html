@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FacilityConnect Dispatcher Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Geist+Mono&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary-fixed": "#271901",
+                        "outline-variant": "#c6c6cd",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-container": "#98805d",
+                        "on-surface-variant": "#45464d",
+                        "on-background": "#1b1b1d",
+                        "surface-bright": "#fcf8fa",
+                        "primary-fixed": "#dae2fd",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "surface-container-high": "#eae7e9",
+                        "surface-container-low": "#f6f3f5",
+                        "primary": "#000000",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "inverse-primary": "#bec6e0",
+                        "on-surface": "#1b1b1d",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "background": "#fcf8fa",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#565e74",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#303032",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0edef",
+                        "inverse-on-surface": "#f3f0f2",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf8fa",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary-container": "#d0e1fb",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-container": "#271901",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary": "#505f76",
+                        "secondary-fixed": "#d3e4fe",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcd9db",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "container-padding": "16px",
+                        "card-gap": "12px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "mono-sm": ["Geist Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "h3": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf8fa;
+            color: #1b1b1d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .card-shadow {
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+        .active-nav-bg {
+            background-color: #d0e1fb;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm z-50">
+<div class="flex justify-between items-center px-container-padding h-16 w-full max-w-[430px] mx-auto">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h1 class="font-h1 text-h1 text-primary dark:text-primary-fixed-dim tracking-tight">FacilityFlow</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-[10px] text-on-primary-fixed font-bold overflow-hidden border border-outline-variant">
+<img alt="Dispatcher Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNGF9Ngi75NHMKlRL1wnGAx4nwcSM4H43xKRP1ZvvexDdFsw3KQHc3lD7zM8kleR27NcX4FuvlbelVlE9AWG6zCXH4MZTTn4B-cnacePB-VxlsTxWu0s7dNPux9bQ7ABSazvO5FFlO57uAqVozX0RwgbAaIzg2D6HjDIYFfofXRms-16XZCL4ZBeULwbS-f_ngtczo5edUis89dg_wvbwFbLol9PtVVRmrofAevm0L3lN1JZXy1299IZeB7FfCBLEW6fQeag9kT88"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="mt-20 px-container-padding max-w-[430px] mx-auto">
+<!-- Dashboard Header -->
+<section class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Dispatcher Overview</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time facility operations status</p>
+</section>
+<!-- Metrics Grid (Bento Style) -->
+<section class="grid grid-cols-2 gap-card-gap mb-lg">
+<!-- Total Tickets -->
+<div class="col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow flex justify-between items-center transition-transform duration-200 active:scale-95">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Total Tickets</p>
+<p class="font-h1 text-h1 text-primary">142</p>
+</div>
+<div class="p-sm bg-primary-fixed rounded-lg">
+<span class="material-symbols-outlined text-on-primary-fixed" data-icon="dashboard">dashboard</span>
+</div>
+</div>
+<!-- New -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow transition-transform duration-200 active:scale-95">
+<div class="flex items-center gap-xs mb-sm">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">New</p>
+</div>
+<p class="font-h2 text-h2 text-on-surface">12</p>
+</div>
+<!-- Assigned -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow transition-transform duration-200 active:scale-95">
+<div class="flex items-center gap-xs mb-sm">
+<span class="w-2 h-2 rounded-full bg-purple-500"></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Assigned</p>
+</div>
+<p class="font-h2 text-h2 text-on-surface">48</p>
+</div>
+<!-- In Progress -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow transition-transform duration-200 active:scale-95">
+<div class="flex items-center gap-xs mb-sm">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">In Progress</p>
+</div>
+<p class="font-h2 text-h2 text-on-surface">34</p>
+</div>
+<!-- Verification Pending -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow transition-transform duration-200 active:scale-95">
+<div class="flex items-center gap-xs mb-sm">
+<span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Verification</p>
+</div>
+<p class="font-h2 text-h2 text-on-surface">18</p>
+</div>
+<!-- Closed Today -->
+<div class="col-span-2 bg-emerald-50 border border-emerald-100 rounded-xl p-md card-shadow flex justify-between items-center">
+<div>
+<p class="font-label-sm text-label-sm text-emerald-700 mb-xs">Closed Today</p>
+<p class="font-h2 text-h2 text-emerald-900">30</p>
+</div>
+<div class="p-sm bg-emerald-100 rounded-lg">
+<span class="material-symbols-outlined text-emerald-700" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+</section>
+<!-- Priority Tickets -->
+<section class="mb-lg">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-h3 text-h3 text-on-surface">Priority Tickets</h3>
+<button class="text-primary font-label-sm text-label-sm hover:underline">View All</button>
+</div>
+<div class="space-y-card-gap">
+<!-- Priority Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow transition-all duration-200 active:scale-[0.98]">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-[2px] bg-error-container text-on-error-container text-[10px] font-bold rounded-full uppercase tracking-wider">Critical</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">#WO-8821</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-xs">HVAC Failure - Data Center B</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Ambient temperature exceeding 28°C. Immediate dispatch required.</p>
+<div class="flex items-center gap-md border-t border-outline-variant pt-sm mt-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12m ago</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Zone 4</span>
+</div>
+</div>
+</div>
+<!-- Priority Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md card-shadow transition-all duration-200 active:scale-[0.98]">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-[2px] bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold rounded-full uppercase tracking-wider">High</span>
+<span class="font-mono-sm text-mono-sm text-on-surface-variant">#WO-8819</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-xs">Main Elevator Malfunction</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Elevator 3 stuck on Floor 12. No passengers reported inside.</p>
+<div class="flex items-center gap-md border-t border-outline-variant pt-sm mt-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">45m ago</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tower A</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="mb-xl">
+<h3 class="font-h3 text-h3 text-on-surface mb-md">Quick Dispatch</h3>
+<div class="grid grid-cols-2 gap-card-gap">
+<button class="flex flex-col items-center justify-center p-md bg-primary text-on-primary rounded-xl gap-sm transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-label-md text-label-md">New Order</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl gap-sm transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="font-label-md text-label-md">Find Tech</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] flex justify-around items-center py-sm px-md z-50 bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-[0px_-1px_3px_0px_rgba(0,0,0,0.1)] rounded-t-xl">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-secondary-container dark:bg-secondary-container rounded-xl px-3 py-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<!-- Queue -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-xl px-3 py-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-label-sm text-label-sm">Queue</span>
+</a>
+<!-- Activity -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-xl px-3 py-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">Activity</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-fixed-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-xl px-3 py-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Atmospheric Micro-interaction Script -->
+<script>
+        // Simple scale effect for interactive elements
+        document.querySelectorAll('.active\\:scale-95, .active\\:scale-\\[0\\.98\\]').forEach(el => {
+            el.addEventListener('touchstart', () => {
+                el.style.transform = el.classList.contains('active:scale-95') ? 'scale(0.95)' : 'scale(0.98)';
+            });
+            el.addEventListener('touchend', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simulating live data update for the "Total Tickets" card periodically
+        setInterval(() => {
+            const ticketCountEl = document.querySelector('.font-h1.text-primary');
+            if (ticketCountEl && Math.random() > 0.8) {
+                const current = parseInt(ticketCountEl.innerText);
+                ticketCountEl.innerText = current + 1;
+                ticketCountEl.style.color = '#3b82f6';
+                setTimeout(() => {
+                    ticketCountEl.style.color = '#000000';
+                }, 1000);
+            }
+        }, 8000);
+    </script>
+</body></html>
