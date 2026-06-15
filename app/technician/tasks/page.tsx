@@ -1,17 +1,89 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 import RequireRole from '../../../components/auth/RequireRole'
 import TopBar from '../../../components/common/TopBar'
-import { Search, ClipboardList, Clock, Wrench, Grid, RotateCw, Home, AlertTriangle, Plus, ArrowRight, Pause } from 'lucide-react'
+import { Search, Clock, Wrench, Grid, RotateCw, Home, AlertTriangle, Plus } from 'lucide-react'
 import BottomNav from '../../../components/common/BottomNav'
+
+const INITIAL_TASKS = [
+  {
+    id: "FC-8291",
+    title: "Clogged Main Drain",
+    location: "Building B, Room 402 • John Smith",
+    priority: "High",
+    category: "Plumbing",
+    dueText: "Due in 45m",
+    iconType: "wrench",
+    defaultStatus: "Assigned"
+  },
+  {
+    id: "FC-8304",
+    title: "HVAC Maintenance",
+    location: "Lobby East Wing • Facilities Manager",
+    priority: "Medium",
+    category: "HVAC",
+    dueText: "Due Today",
+    iconType: "grid",
+    defaultStatus: "Assigned"
+  },
+  {
+    id: "FC-7992",
+    title: "Replace LED Ballasts",
+    location: "Floor 12, Suite 1205 • Sarah Connor",
+    priority: "Low",
+    category: "Electrical",
+    dueText: "1h 12m active",
+    iconType: "rotate",
+    defaultStatus: "In Progress"
+  },
+  {
+    id: "FC-8441",
+    title: "Server Room Leak",
+    location: "Building A, IT Hub • Mark Davis",
+    priority: "High",
+    category: "Emergency",
+    dueText: "Immediate",
+    iconType: "alert",
+    defaultStatus: "Assigned"
+  }
+]
 
 export default function TechnicianTasksPage() {
   const [activeTab, setActiveTab] = useState(0)
-  const [activeTask, setActiveTask] = useState<{ id: string; title: string; location: string; status: string } | null>(null)
+  const [taskStatuses, setTaskStatuses] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    const saved = localStorage.getItem('technician_task_statuses')
+    if (saved) {
+      setTaskStatuses(JSON.parse(saved))
+    } else {
+      const initial: Record<string, string> = {}
+      INITIAL_TASKS.forEach(t => {
+        initial[t.id] = t.defaultStatus
+      })
+      localStorage.setItem('technician_task_statuses', JSON.stringify(initial))
+      setTaskStatuses(initial)
+    }
+  }, [])
+
+  const getStatus = (id: string) => {
+    return taskStatuses[id] || "Assigned"
+  }
+
+  // Filter tasks based on activeTab:
+  // Tab 0: Assigned
+  // Tab 1: In Progress
+  // Tab 2: Completed
+  const tabNames = ["Assigned", "In Progress", "Completed"]
+  const filteredTasks = INITIAL_TASKS.filter(task => {
+    const status = getStatus(task.id)
+    return status === tabNames[activeTab]
+  })
 
   return (
     <RequireRole allowed={["technician"]}>
-      <div className="max-w-[430px] mx-auto min-h-screen bg-surface">
+      <div className="max-w-[430px] mx-auto min-h-screen bg-surface pb-28">
         <TopBar title="Tasks" />
 
         <main className="px-container-padding py-6">
@@ -36,108 +108,87 @@ export default function TechnicianTasksPage() {
           </div>
 
           <div className="flex flex-col gap-card-gap">
-            <article className="task-card bg-white border border-outline-variant rounded-xl p-4 shadow-sm">
-              <div className="flex justify-between items-start mb-3">
-                <span className="font-mono-sm text-mono-sm text-on-surface-variant">#FC-8291</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-error-container text-on-error-container">High</span>
+            {filteredTasks.length === 0 ? (
+              <div className="text-center py-8 text-on-surface-variant text-body-sm">
+                No tasks in this category
               </div>
-              <h3 className="font-h3 text-h3 text-on-surface mb-1">Clogged Main Drain</h3>
-              <p className="text-body-sm text-on-surface-variant mb-4">Building B, Room 402 • John Smith</p>
-              <div className="flex items-center justify-between border-t border-outline-variant pt-3">
-                <div className="flex items-center gap-2">
-                  <Wrench size={18} className="text-primary" />
-                  <span className="text-label-sm font-medium text-on-surface-variant">Plumbing</span>
-                </div>
-                <div className="flex items-center gap-1 text-error">
-                  <Clock size={16} />
-                  <span className="text-label-sm font-semibold">Due in 45m</span>
-                </div>
-              </div>
-            </article>
+            ) : (
+              filteredTasks.map(task => {
+                const isInProgress = getStatus(task.id) === "In Progress"
+                const isCompleted = getStatus(task.id) === "Completed"
 
-            <article className="task-card bg-white border border-outline-variant rounded-xl p-4 shadow-sm">
-              <div className="flex justify-between items-start mb-3">
-                <span className="font-mono-sm text-mono-sm text-on-surface-variant">#FC-8304</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-secondary-container text-on-secondary-container">Medium</span>
-              </div>
-              <h3 className="font-h3 text-h3 text-on-surface mb-1">HVAC Maintenance</h3>
-              <p className="text-body-sm text-on-surface-variant mb-4">Lobby East Wing • Facilities Manager</p>
-              <div className="flex items-center justify-between border-t border-outline-variant pt-3">
-                <div className="flex items-center gap-2">
-                  <Grid size={18} className="text-primary" />
-                  <span className="text-label-sm font-medium text-on-surface-variant">HVAC</span>
-                </div>
-                <div className="flex items-center gap-1 text-on-surface-variant">
-                  <Clock size={16} />
-                  <span className="text-label-sm">Due Today</span>
-                </div>
-              </div>
-            </article>
+                return (
+                  <Link key={task.id} href={`/technician/tasks/${task.id}`}>
+                    <article className={`task-card bg-white border rounded-xl p-4 shadow-sm relative overflow-hidden transition-all active:scale-[0.98] ${
+                      isInProgress ? 'border-primary/20' : 'border-outline-variant'
+                    }`}>
+                      {isInProgress && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />}
+                      
+                      <div className={`flex justify-between items-start mb-3 ${isInProgress ? 'pl-2' : ''}`}>
+                        <span className="font-mono-sm text-mono-sm text-on-surface-variant">#{task.id}</span>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase ${
+                          task.priority === 'High' 
+                            ? 'bg-error-container text-on-error-container' 
+                            : task.priority === 'Medium'
+                            ? 'bg-secondary-container text-on-secondary-container'
+                            : 'bg-surface-container-highest text-on-surface'
+                        }`}>
+                          {task.priority}
+                        </span>
+                      </div>
 
-            <article className="task-card bg-white border border-primary/20 rounded-xl p-4 shadow-sm relative overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
-              <div className="flex justify-between items-start mb-3 pl-2">
-                <span className="font-mono-sm text-mono-sm text-on-surface-variant">#FC-7992</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-surface-container-highest text-on-surface">Low</span>
-              </div>
-              <h3 className="font-h3 text-h3 text-on-surface mb-1 pl-2">Replace LED Ballasts</h3>
-              <p className="text-body-sm text-on-surface-variant mb-4 pl-2">Floor 12, Suite 1205 • Sarah Connor</p>
-              <div className="flex items-center justify-between border-t border-outline-variant pt-3 pl-2">
-                <div className="flex items-center gap-2">
-                  <Grid size={18} className="text-primary" />
-                  <span className="text-label-sm font-medium text-on-surface-variant">Electrical</span>
-                </div>
-                <div className="flex items-center gap-1 text-primary">
-                  <RotateCw size={16} />
-                  <span className="text-label-sm font-bold">1h 12m active</span>
-                </div>
-              </div>
-            </article>
+                      <h3 className={`font-h3 text-h3 text-on-surface mb-1 ${isInProgress ? 'pl-2' : ''}`}>
+                        {task.title}
+                      </h3>
+                      
+                      <p className={`text-body-sm text-on-surface-variant mb-4 ${isInProgress ? 'pl-2' : ''}`}>
+                        {task.location}
+                      </p>
 
-            <article className="task-card bg-white border border-outline-variant rounded-xl p-4 shadow-sm">
-              <div className="flex justify-between items-start mb-3">
-                <span className="font-mono-sm text-mono-sm text-on-surface-variant">#FC-8441</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-error-container text-on-error-container">High</span>
-              </div>
-              <h3 className="font-h3 text-h3 text-on-surface mb-1">Server Room Leak</h3>
-              <p className="text-body-sm text-on-surface-variant mb-4">Building A, IT Hub • Mark Davis</p>
-              <div className="flex items-center justify-between border-t border-outline-variant pt-3">
-                <div className="flex items-center gap-2">
-                  <Home size={18} className="text-primary" />
-                  <span className="text-label-sm font-medium text-on-surface-variant">Emergency</span>
-                </div>
-                <div className="flex items-center gap-1 text-error">
-                  <AlertTriangle size={16} />
-                  <span className="text-label-sm font-bold">Immediate</span>
-                </div>
-              </div>
-            </article>
+                      <div className={`flex items-center justify-between border-t border-outline-variant pt-3 ${isInProgress ? 'pl-2' : ''}`}>
+                        <div className="flex items-center gap-2">
+                          {task.iconType === 'wrench' ? (
+                            <Wrench size={18} className="text-primary" />
+                          ) : task.iconType === 'alert' ? (
+                            <Home size={18} className="text-primary" />
+                          ) : (
+                            <Grid size={18} className="text-primary" />
+                          )}
+                          <span className="text-label-sm font-medium text-on-surface-variant">
+                            {task.category}
+                          </span>
+                        </div>
+
+                        <div className={`flex items-center gap-1 ${
+                          isCompleted
+                            ? 'text-emerald-600'
+                            : task.priority === 'High'
+                            ? 'text-error'
+                            : 'text-on-surface-variant'
+                        }`}>
+                          {task.iconType === 'rotate' ? (
+                            <RotateCw size={16} />
+                          ) : task.iconType === 'alert' ? (
+                            <AlertTriangle size={16} />
+                          ) : (
+                            <Clock size={16} />
+                          )}
+                          <span className="text-label-sm font-semibold">
+                            {isCompleted ? 'Completed' : task.dueText}
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                )
+              })
+            )}
           </div>
         </main>
 
-        {activeTask && (
-          <div className="fixed left-4 right-24 bottom-32 z-40 max-w-[430px] mx-auto">
-            <div className="bg-primary-container border border-primary/20 rounded-lg p-3 flex items-center justify-between gap-3 shadow-md">
-              <div className="flex items-start gap-3">
-                <div className="flex flex-col">
-                  <span className="text-label-sm text-on-surface-variant">{activeTask.id}</span>
-                  <span className="font-medium text-on-primary">{activeTask.title}</span>
-                  <span className="text-[11px] text-on-primary/80">{activeTask.location}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <button onClick={() => setActiveTask(null)} className="px-3 py-2 rounded-md bg-transparent border border-outline-variant text-on-primary">End</button>
-                <button className="p-2 rounded-md bg-white/10 text-on-primary">
-                  <ArrowRight size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
         <BottomNav active="tasks" />
 
-        {/* FAB (kept) */}
+        {/* FAB */}
         <button className="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 duration-150 transition-all z-40">
           <Plus size={28} />
         </button>
@@ -145,3 +196,4 @@ export default function TechnicianTasksPage() {
     </RequireRole>
   )
 }
+

@@ -1,12 +1,25 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect } from 'react'
 import TopBar from '../../../components/common/TopBar'
 import BottomNav from '../../../components/common/BottomNav'
-import { Search, SlidersHorizontal, Calendar } from 'lucide-react'
+import { Search, SlidersHorizontal } from 'lucide-react'
 import TicketList from '../../../components/tickets/TicketList'
 import Link from 'next/link'
 import RequireRole from '../../../components/auth/RequireRole'
 
 function TicketsPage() {
+  const [activeTab, setActiveTab] = useState<'active' | 'closed'>('active')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const tabParam = params.get('tab')
+      if (tabParam === 'closed' || tabParam === 'active') {
+        setActiveTab(tabParam)
+      }
+    }
+  }, [])
+
   return (
     <div className="min-h-screen flex flex-col items-center">
       <TopBar title="My Tickets" />
@@ -24,12 +37,22 @@ function TicketsPage() {
           </div>
 
           <div className="bg-surface-container p-1 rounded-lg flex w-full mb-6">
-            <button className="flex-1 py-1.5 text-label-md font-label-md bg-surface-container-lowest rounded-[6px] shadow-sm text-primary transition-all">Active</button>
-            <button className="flex-1 py-1.5 text-label-md font-label-md text-secondary hover:text-primary transition-all">Closed</button>
+            <button 
+              onClick={() => setActiveTab('active')} 
+              className={`flex-1 py-1.5 text-label-md font-label-md rounded-[6px] transition-all ${activeTab === 'active' ? 'bg-surface-container-lowest shadow-sm text-primary' : 'text-secondary hover:text-primary'}`}
+            >
+              Active
+            </button>
+            <button 
+              onClick={() => setActiveTab('closed')} 
+              className={`flex-1 py-1.5 text-label-md font-label-md rounded-[6px] transition-all ${activeTab === 'closed' ? 'bg-surface-container-lowest shadow-sm text-primary' : 'text-secondary hover:text-primary'}`}
+            >
+              Closed
+            </button>
           </div>
         </div>
 
-        <TicketList />
+        <TicketList tab={activeTab} />
 
       </main>
       <Link href="/customer/tickets/new" className="fixed bottom-28 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-40">

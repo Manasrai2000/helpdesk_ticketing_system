@@ -17,8 +17,33 @@ function uid() {
 export default function RaiseTicketForm() {
   const [form, setForm] = useState<FormState>({ category: '', title: '', priority: 'low', description: '', files: [] })
   const [previews, setPreviews] = useState<string[]>([])
+  const [selectedDepts, setSelectedDepts] = useState<string[]>([])
   const [submitting, setSubmitting] = useState(false)
   const router = useRouter()
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const cat = params.get('category') || ''
+      const tit = params.get('title') || ''
+      const dept = params.get('dept') || ''
+      if (cat) {
+        setForm(prev => ({ ...prev, category: cat }))
+      }
+      if (tit) {
+        setForm(prev => ({ ...prev, title: tit }))
+      }
+      if (dept) {
+        setSelectedDepts(prev => prev.includes(dept) ? prev : [...prev, dept])
+      }
+    }
+  }, [])
+
+  function toggleDept(dept: string) {
+    setSelectedDepts(prev => 
+      prev.includes(dept) ? prev.filter(d => d !== dept) : [...prev, dept]
+    )
+  }
 
   function onFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files ? Array.from(e.target.files) : []
@@ -40,6 +65,7 @@ export default function RaiseTicketForm() {
       id: uid(),
       title: form.title || 'Untitled',
       description: form.description || '',
+      departments: selectedDepts,
       priority: form.priority,
       status: form.priority === 'high' ? 'Urgent' : 'Pending',
       date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
@@ -80,6 +106,79 @@ export default function RaiseTicketForm() {
           <option value="furniture">Furniture & Layout</option>
           <option value="it">IT & Infrastructure</option>
         </select>
+      </div>
+
+      <div className="space-y-3">
+        <label className="font-label-md text-label-md text-on-surface">Department & Issue Area (Select multiple)</label>
+        <div className="space-y-4 bg-surface-container-low/50 p-4 rounded-xl border border-outline-variant">
+          {/* E&M Group */}
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-secondary">E&M (Electric and Management)</h4>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform text-xs font-semibold">
+                <input 
+                  type="checkbox" 
+                  checked={selectedDepts.includes("E&M - Water")} 
+                  onChange={() => toggleDept("E&M - Water")}
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
+                />
+                <span>Water</span>
+              </label>
+              <label className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform text-xs font-semibold">
+                <input 
+                  type="checkbox" 
+                  checked={selectedDepts.includes("E&M - Light")} 
+                  onChange={() => toggleDept("E&M - Light")}
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
+                />
+                <span>Light</span>
+              </label>
+            </div>
+          </div>
+
+          {/* B&R Group */}
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-secondary">B&R (Barrack and Repair)</h4>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform text-xs font-semibold">
+                <input 
+                  type="checkbox" 
+                  checked={selectedDepts.includes("B&R - Joinery")} 
+                  onChange={() => toggleDept("B&R - Joinery")}
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
+                />
+                <span>Joinery</span>
+              </label>
+              <label className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform text-xs font-semibold">
+                <input 
+                  type="checkbox" 
+                  checked={selectedDepts.includes("B&R - Plumbing")} 
+                  onChange={() => toggleDept("B&R - Plumbing")}
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
+                />
+                <span>Plumbing</span>
+              </label>
+              <label className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform text-xs font-semibold">
+                <input 
+                  type="checkbox" 
+                  checked={selectedDepts.includes("B&R - Leak")} 
+                  onChange={() => toggleDept("B&R - Leak")}
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
+                />
+                <span>Leak</span>
+              </label>
+              <label className="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform text-xs font-semibold">
+                <input 
+                  type="checkbox" 
+                  checked={selectedDepts.includes("B&R - Cipage")} 
+                  onChange={() => toggleDept("B&R - Cipage")}
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
+                />
+                <span>Cipage</span>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-2">
