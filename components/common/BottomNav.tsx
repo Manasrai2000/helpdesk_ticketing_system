@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import { Home, Ticket, Bell, User, Wrench, ClipboardList } from 'lucide-react'
+import { Home, Ticket, Bell, User, Wrench, ClipboardList, LayoutDashboard, History, Users, MoreHorizontal } from 'lucide-react'
 import { useRole } from '../auth/role-context'
 
 export default function BottomNav({ active = 'home' }: { active?: string }) {
@@ -17,17 +17,17 @@ export default function BottomNav({ active = 'home' }: { active?: string }) {
         ]
       case 'dispatcher':
         return [
-          { href: '/dispatcher', key: 'home', label: 'Home', icon: Home },
+          { href: '/dispatcher', key: 'home', label: 'Dashboard', icon: LayoutDashboard },
           { href: '/dispatcher/queue', key: 'queue', label: 'Queue', icon: ClipboardList },
-          { href: '/notifications', key: 'notifications', label: 'Notifications', icon: Bell },
-          { href: '/profile', key: 'profile', label: 'Profile', icon: User },
+          { href: '/dispatcher/activity', key: 'activity', label: 'Activity', icon: History },
+          { href: '/dispatcher/profile', key: 'profile', label: 'Profile', icon: User },
         ]
       case 'admin':
         return [
-          { href: '/admin', key: 'home', label: 'Admin', icon: Home },
-          { href: '/admin/projects', key: 'projects', label: 'Projects', icon: ClipboardList },
-          { href: '/notifications', key: 'notifications', label: 'Notifications', icon: Bell },
-          { href: '/profile', key: 'profile', label: 'Profile', icon: User },
+          { href: '/admin', key: 'home', label: 'Dashboard', icon: LayoutDashboard },
+          { href: '/admin/users', key: 'users', label: 'Users', icon: Users },
+          { href: '/admin/tickets', key: 'tickets', label: 'Tickets', icon: Ticket },
+          { href: '/admin/more', key: 'more', label: 'More', icon: MoreHorizontal },
         ]
       default:
         return [
